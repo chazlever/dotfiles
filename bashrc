@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # Author: Chaz Lever
-# Date: Fri Jun 24 15:21:19 PDT 2011
+# Date: 06/25/2011
 
 # If not running interactively, don't do anything
 [ -z "${PS1}" ] && return
