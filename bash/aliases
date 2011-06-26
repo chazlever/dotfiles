@@ -1,0 +1,30 @@
+#!/bin/bash
+
+# enable colorized listings
+if [ "$(echo $(uname) | tr A-Z a-z)" = "darwin" ]; then
+  alias ls='ls -G'
+else
+  alias ls='ls --color'
+fi
+
+alias l.='ls -d .*'     # list hidden files
+alias ll.='ls -ld .*'   # long listing of hidden files
+alias ll='ls -lh'       # long listing of files
+alias la='ls -lha'      # list all files 
+alias lA='ls -lhA'      # list all files (including . and ..)
+alias lld='ls -lUd */'  # list only directories 
+
+alias grep='grep --color' # enable colorized results
+alias pdb='python -m pdb' # add quick alias for python debugger
+
+# Use vim instead of less
+if [ ! -z $(which vim) ] && [ -f "${HOME}/.bin/less.sh" ]; then
+  alias less="${HOME}/.bin/less.sh"
+fi
+
+# Add ssh/scp aliases for connecting over a proxy
+if [ ! -z $(which nc) ]; then
+  alias pssh='ssh -o "ProxyCommand /usr/bin/nc -x localhost:8080 %h %p"'
+  alias pscp='scp -o "ProxyCommand /usr/bin/nc -x localhost:8080 %h %p"'
+fi
+

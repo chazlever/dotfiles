@@ -1,0 +1,14 @@
+[user]
+	name = <%= print("Your Name: "); STDOUT.flush; STDIN.gets.chomp %>
+	email = <%= print("Your Email: "); STDOUT.flush; STDIN.gets.chomp %>
+[alias]
+	last = cat-file commit HEAD
+[color]
+   ui = true
+[core]
+	excludesfile = <%= ENV['HOME'] %>/.gitignore
+[format]
+	pretty = %C(yellow)%h%Creset %s %C(red)(%an, %cr)%Creset
+[github]
+	user = <%= print("GitHub Username: "); STDOUT.flush; STDIN.gets.chomp %>
+	token = <%= print("GitHub API Token: "); STDOUT.flush; STDIN.gets.chomp %>

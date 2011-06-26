@@ -1,0 +1,16 @@
+# First of all, I really don't like C-a to be my key combination, since
+# I use it a lot to get the same effect as the `Home' key. So, I choose
+# C-w as my preferred shortcut key by adding this line to my ~/.screenrc.
+escape ^]]
+
+# Prefer an audible bell to a visual one
+vbell off
+
+# Skipt the startup message
+startup_message off
+
+# Display a caption string below, appearing like tabs and
+# # displaying the window number and application name (by default).
+caption always
+caption string "%{kw}%-w%{wr}%n %t%{-}%+w"
+

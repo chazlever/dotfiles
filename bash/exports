@@ -1,0 +1,32 @@
+#!/bin/bash
+
+if [ ! -z $(which vim) ]; then
+  # Set the default text editor to vim
+  export EDITOR=vim
+ 
+  # Get vim version to see what's supported 
+  VIM_VERSION=$(vim --version | head -n 1 | sed -e 's/(.*)//g' |\
+    grep -oE "[0-9]+" | head -n 1)
+
+  # Use vim to browse man pages. One can use Ctrl-[ and Ctrl-t
+  # to browse and return from referenced man pages. ZZ or q to quit.
+  # Note initially within vim, one can goto the man page for the
+  # word under the cursor by using [section_number]K.
+  # Note we use bash explicitly here to support process substitution
+  # which in turn suppresses the "Vim: Reading from stdin..." warning.
+  if [ ${VIM_VERSION} -ge 7 ]; then
+    export MANPAGER='bash -c "vim -MRn -c \"set ft=man nomod nolist nospell nonu\" \
+      -c \"nm q :qa!<CR>\" -c \"nm <end> G\" -c \"nm <home> gg\"</dev/tty <(col -b)"'
+  fi
+  # GROFF_NO_SGR is required with man-db which uses grotty to
+  # output SGR codes by default when attached to a terminal.
+  # We want vim to highlight the raw text, so disable that feature.
+  # Also see MANPAGER in my .vimrc for extra handling to support
+  # ctrl-[ with man-db
+  if [ ${VIM_VERSION} -ge 7 ]; then
+    export GROFF_NO_SGR=1
+  fi
+  # Another option is to use $VIMRUNTIME/macros/less.sh
+  # though I find that less effective
+fi
+
