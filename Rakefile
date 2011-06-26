@@ -73,11 +73,11 @@ def link_file(file)
   ofile = file
   if $cfg_mappings.key?(file)
     ofile = $cfg_mappings[file]
-    system %Q{mkdir -p "#{File.dirname(ofile)}"}
+    system %Q{mkdir -p "#{File.join(ENV['HOME'], File.dirname(ofile))}"}
   end
   if file =~ /.erb$/
     puts "generating ~/#{ofile.sub('.erb', '')}"
-    File.open(File.join(ENV['HOME'], ".#{ofile.sub('.erb', '')}"), 'w') do |new_file|
+    File.open(File.join(ENV['HOME'], "#{ofile.sub('.erb', '')}"), 'w') do |new_file|
       new_file.write ERB.new(File.read(file)).result(binding)
     end
   else
