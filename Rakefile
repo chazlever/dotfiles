@@ -9,7 +9,7 @@ task :install do
   if File.exist?(mf)
     File.open(mf, 'r') do |file|
       while(line = file.gets)
-        arr = split(",")
+        arr = line.split(",")
         if arr.size == 2
           $cfg_mappings[arr[0].strip] = arr[1].strip
         end
