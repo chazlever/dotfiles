@@ -1,10 +1,5 @@
 #!/bin/bash
 
-# Make sure /usr/local/bin before /bin
-PATH="/usr/local/bin:$(echo ${PATH} | \
-  sed -e 's-/usr/local/bin--g' | \
-  sed -e 's-::--g')"
-
 # Setup generic system path for all systems
 PATH="${HOME}/.bin:${PATH}"
 
