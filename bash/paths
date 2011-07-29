@@ -10,7 +10,7 @@ if [ -f "${FILE}" ]; then
   do
     [ -z $line ] && continue
     if [ -z "${TEMP}" ]; then
-      TEMP=$(eval echo $line)
+      TEMP="$(eval echo $line)"
     else
       TEMP="${TEMP}:$(eval echo $line)"
     fi
