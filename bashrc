@@ -6,9 +6,9 @@
 # If not running interactively, don't do anything
 [ -z "${PS1}" ] && return
 
-# Add any new paths to this file
+# Add new items to path from ~/.bash/paths
 if [ -f ~/.bash/paths ]; then
-  . ~/.bash/paths
+  . ~/.bash/path_helper
 fi
 
 # Add any new exports to this file

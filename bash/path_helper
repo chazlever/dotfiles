@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# Parse directories from ${FILE} and add to ${PATH}
+path_helper() {
+  TEMP=
+  FILE="$1"
+  if [ -f "${FILE}" ]; then
+    while read line
+    do
+      [ -z $line ] && continue
+      if [ -z "${TEMP}" ]; then
+        TEMP="$(eval echo $line)"
+      else
+        TEMP="${TEMP}:$(eval echo $line)"
+      fi
+    done < "${FILE}"
+  fi
+
+  export PATH="${TEMP}:${PATH}"
+}
+
+path_helper "${HOME}/.bash/paths"
+path_helper "${HOME}/.pathrc"
+
+unset path_helper
+
