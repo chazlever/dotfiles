@@ -1,12 +1,12 @@
 #!/bin/bash
 
-# enable colorized listings
+# Get the color flag depending on OS
+COLOR='--color'
 if [ "$(echo $(uname) | tr A-Z a-z)" = "darwin" ]; then
-  alias ls='ls -G'
-else
-  alias ls='ls --color'
+  COLOR='-G'
 fi
 
+alias ls="ls ${COLOR}"  # enable colorized listings
 alias l.='ls -d .*'     # list hidden files
 alias ll.='ls -ld .*'   # long listing of hidden files
 alias ll='ls -lh'       # long listing of files

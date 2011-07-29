@@ -7,7 +7,7 @@
 [ -z "${PS1}" ] && return
 
 # Add new items to path from ~/.bash/paths
-if [ -f ~/.bash/paths ]; then
+if [ -f ~/.bash/path_helper ]; then
   . ~/.bash/path_helper
 fi
 
@@ -22,8 +22,8 @@ if [ -f ~/.bash/aliases ]; then
 fi
 
 # Add the bashmarks script to this file
-if [ -f ~/.bash/bashmarks.sh ]; then
-  . ~/.bash/bashmarks.sh
+if [ -f ~/.bash/bashmarks ]; then
+  . ~/.bash/bashmarks
 fi
 
 # Add any new auto completions to this file
