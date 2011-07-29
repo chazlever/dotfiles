@@ -1,4 +1,25 @@
 #!/bin/bash
 
-export PATH="${HOME}/.bin:${PATH}"
+# Make sure /usr/local/bin before /bin
+PATH="/usr/local/bin:$(echo ${PATH} | \
+  sed -e 's-/usr/local/bin--g' | \
+  sed -e 's-::--g')"
 
+# Setup generic system path for all systems
+PATH="${HOME}/.bin:${PATH}"
+
+# Add any machine specific paths from ${FILE}
+FILE="${HOME}/.pathrc"
+if [ -f "${FILE}" ]; then
+  while read line
+  do
+    [ -z $line ] && continue
+    if [ -z "${TEMP}" ]; then
+      eval TEMP=$(eval echo $line)
+    else
+      eval TEMP="${TEMP}:$(eval echo $line)"
+    fi
+  done < "${FILE}"
+fi
+
+export PATH="${TEMP}:${PATH}"
