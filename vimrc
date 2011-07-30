@@ -10,6 +10,10 @@ if !has('gui_macvim')
   call add(g:pathogen_disabled, 'vim-peepopen')
 endif
 
+if !has('python')
+   call add(g:pathogen_disabled, 'pyflakes-vim')
+endif
+
 silent! call pathogen#runtime_append_all_bundles()
 
 
@@ -92,6 +96,9 @@ if !has('gui_running')
   endfunction
   map <Leader>p <Esc>:call TogglePaste()<CR>
 endif
+
+" Add mappings to remove trailing whitespace
+map <Leader>s <Esc>:% s/\s\+$//g<CR>:echo "removed trailing whitespace"<CR>
 
 " Toggle hidden characters
 function ToggleHiddenChars()
