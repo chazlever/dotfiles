@@ -16,7 +16,9 @@ path_helper() {
     done < "${FILE}"
   fi
 
-  export PATH="${TEMP}:${PATH}"
+  if [ ! -z "${TEMP}" ]; then
+    export PATH="${TEMP}:${PATH}"
+  fi
 }
 
 path_helper "${HOME}/.bash/paths"
