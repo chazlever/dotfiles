@@ -1,6 +1,7 @@
 " Copy or symlink to ~/.vimrc or ~/_vimrc.
 
-set nocompatible                  " Must come first because it changes other options.
+" Must come first because it changes other options.
+set nocompatible
 
 " To disable a plugin, add it's bundle name to the following list
 let g:pathogen_disabled = []
@@ -10,6 +11,7 @@ if !has('gui_macvim')
 endif
 
 silent! call pathogen#runtime_append_all_bundles()
+
 
 syntax enable                     " Turn on syntax highlighting.
 filetype plugin indent on         " Turn on file type detection.
@@ -54,6 +56,10 @@ set autoindent
 
 set laststatus=2                  " Show the status line all the time
 
+" Define the characters to use for hidden characters
+set list listchars=tab:▷⋅,trail:⋅,nbsp:%,eol:$
+set nolist
+
 " Useful status information at bottom of screen
 set statusline=[%n]\ %<%.99f\ %h%w%m%r%y\ %{fugitive#statusline()}%{exists('*CapsLockStatusline')?CapsLockStatusline():''}%=%-16(\ %l,%c-%v\ %)%P
 
@@ -87,6 +93,16 @@ if !has('gui_running')
   endfunction
   map <Leader>p <Esc>:call TogglePaste()<CR>
 endif
+
+" Toggle hidden characters
+function ToggleHiddenChars()
+  if &list
+    set nolist
+  else
+    set list
+  endif
+endfunction
+map <silent> <Leader>l <Esc>:call ToggleHiddenChars()<CR>
 
 " Toggle line number
 function ToggleLineNumber()
