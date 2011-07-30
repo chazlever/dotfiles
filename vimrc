@@ -57,7 +57,7 @@ set autoindent
 set laststatus=2                  " Show the status line all the time
 
 " Define the characters to use for hidden characters
-set list listchars=tab:▷⋅,trail:⋅,nbsp:%,eol:$
+set list listchars=tab:>-,trail:⋅,nbsp:%,eol:$
 set nolist
 
 " Useful status information at bottom of screen
