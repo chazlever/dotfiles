@@ -57,8 +57,7 @@ set autoindent
 set laststatus=2                  " Show the status line all the time
 
 " Define the characters to use for hidden characters
-set list listchars=tab:>-,trail:⋅,nbsp:%,eol:$
-set nolist
+set nolist listchars=tab:>-,trail:.,nbsp:%,eol:$
 
 " Useful status information at bottom of screen
 set statusline=[%n]\ %<%.99f\ %h%w%m%r%y\ %{fugitive#statusline()}%{exists('*CapsLockStatusline')?CapsLockStatusline():''}%=%-16(\ %l,%c-%v\ %)%P
