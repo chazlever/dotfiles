@@ -24,7 +24,7 @@ fi
 
 # Add ssh/scp aliases for connecting over a proxy
 if [ ! -z $(which nc) ]; then
-  alias pssh='ssh -o "ProxyCommand /usr/bin/nc -x localhost:8080 %h %p"'
-  alias pscp='scp -o "ProxyCommand /usr/bin/nc -x localhost:8080 %h %p"'
+  alias pssh='ssh -o "ProxyCommand nc -x localhost:8080 %h %p"'
+  alias pscp='scp -o "ProxyCommand nc -x localhost:8080 %h %p"'
 fi
 
