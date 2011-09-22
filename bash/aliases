@@ -12,7 +12,8 @@ alias ll.='ls -ld .*'   # long listing of hidden files
 alias ll='ls -lh'       # long listing of files
 alias la='ls -lha'      # list all files 
 alias lA='ls -lhA'      # list all files (including . and ..)
-alias lld='ls -lUd */'  # list only directories 
+alias lsd='ls -Ud'      # list directories as files
+alias lld='ls -lUd'     # long listing of directories as files
 
 alias grep='grep --color' # enable colorized results
 alias pdb='python -m pdb' # add quick alias for python debugger
