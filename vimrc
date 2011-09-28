@@ -6,6 +6,10 @@ set nocompatible
 " To disable a plugin, add it's bundle name to the following list
 let g:pathogen_disabled = []
 
+if empty(system('which ctags'))
+  call add(g:pathogen_disabled, 'vim-taglist')
+endif
+
 if !has('gui_macvim')
   call add(g:pathogen_disabled, 'vim-peepopen')
 endif
