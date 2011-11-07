@@ -15,7 +15,9 @@ alias lA='ls -lhA'      # list all files (including . and ..)
 alias lsd='ls -Ud'      # list directories as files
 alias lld='ls -lUd'     # long listing of directories as files
 
-alias grep='grep --color' # enable colorized results
+alias grep='grep --color'   # enable colorized results
+alias egrep='egrep --color' # enable colorized results
+alias fgrep='fgrep --color' # enable colorized results
 alias pdb='python -m pdb' # add quick alias for python debugger
 
 # Use vim instead of less
