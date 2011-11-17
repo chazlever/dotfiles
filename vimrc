@@ -1,7 +1,53 @@
-" Copy or symlink to ~/.vimrc or ~/_vimrc.
+"------------------------------------------------------------------------------
+" File: $HOME/.vimrc
+" Author: Chaz Lever <https://github.com/chazlever>
+"------------------------------------------------------------------------------
 
-" Must come first because it changes other options.
-set nocompatible
+"------------------------------------------------------------------------------
+" STANDARD STUFF
+"------------------------------------------------------------------------------
+
+set nocompatible                  " Disable vi compatibility
+set showcmd                       " Display incomplete commands.
+set showmode                      " Display the mode you're in.
+set backspace=indent,eol,start    " Intuitive backspacing.
+set hidden                        " Handle multiple buffers better.
+set wildmenu                      " Enhanced command line completion.
+set wildmode=list:longest         " Complete files like a shell.
+set ignorecase                    " Case-insensitive searching.
+set smartcase                     " But case-sensitive if expression contains a capital letter.
+set number                        " Show line numbers.
+set ruler                         " Show cursor position.
+set incsearch                     " Highlight matches as you type.
+set hlsearch                      " Highlight matches.
+set wrap                          " Turn on line wrapping.
+set scrolloff=3                   " Show 3 lines of context around the cursor.
+set title                         " Set the terminal's title
+set visualbell                    " No beeping.
+set nobackup                      " Don't make a backup before overwriting a file.
+set nowritebackup                 " And again.
+set directory=$HOME/.vim/tmp//,.  " Keep swap files in one location
+set tabstop=3                     " Global tab width.
+set shiftwidth=3                  " And again, related.
+set expandtab                     " Use spaces instead of tabs
+set smarttab                      " Insert tabs according to tabstop, shiftwidth, and expandtab
+set autoindent                    " Copy indentation from previous line
+set laststatus=2                  " Show the status line all the time
+syntax enable                     " Turn on syntax highlighting.
+filetype plugin indent on         " Turn on file type detection.
+colorscheme topfunky-light
+
+" Define the characters to use for hidden characters
+set nolist listchars=tab:>-,trail:.,nbsp:%,eol:$
+
+" Useful status information at bottom of screen
+set statusline=[%n]\ %<%.99f\ %h%w%m%r%y\ %{fugitive#statusline()}%{exists('*CapsLockStatusline')?CapsLockStatusline():''}%=%-16(\ %l,%c-%v\ %)%P
+
+"------------------------------------------------------------------------------
+" ENABLE PLUGINS
+"------------------------------------------------------------------------------
+
+runtime macros/matchit.vim        " Load the matchit plugin.
 
 " To disable a plugin, add it's bundle name to the following list
 let g:pathogen_disabled = []
@@ -20,58 +66,9 @@ endif
 
 silent! call pathogen#runtime_append_all_bundles()
 
-
-syntax enable                     " Turn on syntax highlighting.
-filetype plugin indent on         " Turn on file type detection.
-
-runtime macros/matchit.vim        " Load the matchit plugin.
-
-set showcmd                       " Display incomplete commands.
-set showmode                      " Display the mode you're in.
-
-set backspace=indent,eol,start    " Intuitive backspacing.
-
-set hidden                        " Handle multiple buffers better.
-
-set wildmenu                      " Enhanced command line completion.
-set wildmode=list:longest         " Complete files like a shell.
-
-set ignorecase                    " Case-insensitive searching.
-set smartcase                     " But case-sensitive if expression contains a capital letter.
-
-set number                        " Show line numbers.
-set ruler                         " Show cursor position.
-
-set incsearch                     " Highlight matches as you type.
-set hlsearch                      " Highlight matches.
-
-set wrap                          " Turn on line wrapping.
-set scrolloff=3                   " Show 3 lines of context around the cursor.
-
-set title                         " Set the terminal's title
-
-set visualbell                    " No beeping.
-
-set nobackup                      " Don't make a backup before overwriting a file.
-set nowritebackup                 " And again.
-set directory=$HOME/.vim/tmp//,.  " Keep swap files in one location
-
-set tabstop=3                    " Global tab width.
-set shiftwidth=3                 " And again, related.
-set expandtab                    " Use spaces instead of tabs
-set smarttab
-set autoindent
-
-set laststatus=2                  " Show the status line all the time
-
-" Define the characters to use for hidden characters
-set nolist listchars=tab:>-,trail:.,nbsp:%,eol:$
-
-" Useful status information at bottom of screen
-set statusline=[%n]\ %<%.99f\ %h%w%m%r%y\ %{fugitive#statusline()}%{exists('*CapsLockStatusline')?CapsLockStatusline():''}%=%-16(\ %l,%c-%v\ %)%P
-
-" Or use vividchalk
-colorscheme topfunky-light
+"------------------------------------------------------------------------------
+" SET KEY MAPPINGS
+"------------------------------------------------------------------------------
 
 " Tab mappings.
 map <leader>tt :tabnew<cr>
@@ -88,8 +85,11 @@ map <leader>tm :tabmove
 map <C-n><C-n> <Esc>:NERDTreeToggle<CR>
 map <C-n><C-h> <Esc>:help NERD_tree.txt<CR>
 
+" Toggle search highlighting
+map <Leader>h <Esc>:set hls!<CR>:echo "toggle search highlighting"<CR>
+
+" Toggle paste option
 if !has('gui_running')
-  " Toggle paste option
   function TogglePaste()
     if &paste
       set nopaste
@@ -137,4 +137,3 @@ function ToggleWordWrap()
   endif
 endfunction
 map <silent> <Leader>w <Esc>:call ToggleWordWrap()<CR>
-
