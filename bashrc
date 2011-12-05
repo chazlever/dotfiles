@@ -92,3 +92,5 @@ fi
 # Set RWX permissions only for user and group
 umask 007
 
+# Disable XON/XOFF flow control since it interferes with some BASH key bindings
+stty -ixon
