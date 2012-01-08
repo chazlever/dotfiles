@@ -1,9 +1,10 @@
 #!/bin/bash
 
-# Parse directories from ${FILE} and add to ${PATH}
+# Parse directories from ${FILE} and add to ${VAR}
 path_helper() {
   TEMP=
   FILE="$1"
+  VAR="$2"
   if [ -f "${FILE}" ]; then
     while read line
     do
@@ -17,12 +18,15 @@ path_helper() {
   fi
 
   if [ ! -z "${TEMP}" ]; then
-    export PATH="${TEMP}:${PATH}"
+    VARPATH=$(eval 'echo ${'"${VAR}"'}')
+    export "${VAR}"="${TEMP}:${VARPATH}"
   fi
 }
 
-path_helper "${HOME}/.bash/paths"
-path_helper "${HOME}/.pathrc"
+path_helper "${HOME}/.bash/paths" "PATH"
+path_helper "${HOME}/.pathrc" "PATH"
+path_helper "${HOME}/.bash/pythonpaths" "PYTHONPATH"
+path_helper "${HOME}/.pythonpathrc" "PYTHONPATH"
 
 unset path_helper
 
