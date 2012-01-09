@@ -1,0 +1,7 @@
+#!/bin/bash
+
+if [ ! -z $(which curl) ]; then
+   curl icanhazip.com
+else
+  echo "curl: Could not be found"
+fi

@@ -96,3 +96,6 @@ umask 007
 if [ -s "$HOME/.rvm/scripts/rvm" ]; then
    . "$HOME/.rvm/scripts/rvm"
 fi
+
+# Disable XON/XOFF flow control since it interferes with some BASH key bindings
+stty -ixon
