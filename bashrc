@@ -92,3 +92,7 @@ fi
 # Set RWX permissions only for user and group
 umask 007
 
+# Load RVM function
+if [ -s "$HOME/.rvm/scripts/rvm" ]; then
+   . "$HOME/.rvm/scripts/rvm"
+fi
