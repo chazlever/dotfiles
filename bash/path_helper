@@ -19,7 +19,11 @@ path_helper() {
 
   if [ ! -z "${TEMP}" ]; then
     VARPATH=$(eval 'echo ${'"${VAR}"'}')
-    export "${VAR}"="${TEMP}:${VARPATH}"
+    if [ ! -z "${VARPATH}" ]; then
+      export "${VAR}"="${TEMP}:${VARPATH}"
+    else
+      export "${VAR}"="${TEMP}"
+    fi
   fi
 }
 
