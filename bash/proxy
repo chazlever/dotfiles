@@ -1,0 +1,147 @@
+#!/bin/bash
+
+proxy() {
+  local OPTIND OPTARG USAGE PORT PROXY_SOCKS PID
+  
+  USAGE="Usage: proxy [-h] [-p port] hostname"
+
+  # Set defaults
+  PORT=8080
+  
+  # Parse command line options
+  while getopts hp: OPT; do
+    case "${OPT}" in
+      h)
+        echo ${USAGE}
+        return 0
+        ;;
+      p)
+        PORT=${OPTARG}
+        ;;
+      \?)
+        echo ${USAGE} >&2
+        return 1
+        ;;
+    esac
+  done
+  
+  # We want at least one non-option argument
+  shift $(expr ${OPTIND} - 1)
+  if [ $# -eq 0 ]; then
+    echo $USAGE >&2
+    return 1
+  fi
+  
+  PROXY_SOCKS="ssh -fND ${PORT}"
+  
+  # Make sure we kill any existing connections
+  PID=$(psgrep -n ${PROXY_SOCKS} | head -n1 | awk '{ print $2 }')
+  if [ ! -z ${PID} ]; then
+    kill ${PID}
+  fi
+  
+  eval "${PROXY_SOCKS} $1"
+}
+
+
+pssh() {
+  local OPTIND OPTARG USAGE PORT PROXY_SOCKS PROXY_SSH
+  
+  if [ -z $(which nc) ]; then
+    echo "error: netcat required" >&2
+    return 1
+  fi
+  
+  USAGE="Usage: pssh [-h] [-p port] host"
+
+  # Set defaults
+  PORT=8080
+
+  # Parse command line options
+  while getopts hp: OPT; do
+    case "${OPT}" in
+      h)
+        echo ${USAGE}
+        return 0
+        ;;
+      p)
+        PORT=${OPTARG}
+        ;;
+      \?)
+        echo ${USAGE} >&2
+        return 1
+        ;;
+    esac
+  done
+
+  # We want at least one non-option argument
+  shift $(expr ${OPTIND} - 1)
+  if [ $# -eq 0 ]; then
+    echo $USAGE >&2
+    return 1
+  fi
+
+  PROXY_SOCKS="ssh -fND ${PORT}"
+
+  # Make sure we kill any existing connections
+  PID=$(psgrep -n ${PROXY_SOCKS} | head -n1 | awk '{ print $2 }')
+  if [ -z ${PID} ]; then
+    echo "error: no proxy running on port ${PORT}" >&2
+    return 1
+  fi
+
+  PROXY_SSH="ssh -o 'ProxyCommand nc -x localhost:${PORT} %h %p' $1"
+  eval ${PROXY_SSH}
+}
+
+
+pscp() {
+  local OPTIND OPTARG USAGE PORT PROXY_SOCKS PROXY_SCP
+  
+  if [ -z $(which nc) ]; then
+    echo "error: netcat required" >&2
+    return 1
+  fi
+  
+  USAGE="Usage: pscp [-h] [-p port] [[user@]host1:]file1 ... [[user@]host2:]file2"
+
+  # Set defaults
+  PORT=8080
+
+  # Parse command line options
+  while getopts hp: OPT; do
+    case "${OPT}" in
+      h)
+        echo ${USAGE}
+        return 0
+        ;;
+      p)
+        PORT=${OPTARG}
+        ;;
+      \?)
+        echo ${USAGE} >&2
+        return 1
+        ;;
+    esac
+  done
+  
+  # We want at least one non-option argument
+  shift $(expr ${OPTIND} - 1)
+  if [ $# -eq 0 ]; then
+    echo $USAGE >&2
+    return 1
+  fi
+
+  PROXY_SOCKS="ssh -fND ${PORT}"
+
+  # Make sure we kill any existing connections
+  PID=$(psgrep -n ${PROXY_SOCKS} | head -n1 | awk '{ print $2 }')
+  if [ -z ${PID} ]; then
+    echo "error: no proxy running on port ${PORT}" >&2
+    return 1
+  fi
+
+  PROXY_SCP="scp -o 'ProxyCommand nc -x localhost:${PORT} %h %p' $@"
+  eval ${PROXY_SCP}
+}
+

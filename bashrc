@@ -11,6 +11,11 @@ if [ -f ~/.bash/path_helper ]; then
   . ~/.bash/path_helper
 fi
 
+# Add new SSH proxy functions
+if [ -f ~/.bash/proxy ]; then
+  . ~/.bash/proxy
+fi
+
 # Add any new exports to this file
 if [ -f ~/.bash/exports ]; then
   . ~/.bash/exports
@@ -47,7 +52,7 @@ shopt -s checkwinsize
 
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
-    xterm-color) color_prompt=yes;;
+  xterm-color) color_prompt=yes;;
 esac
 
 # uncomment for a colored prompt, if the terminal has the capability; turned
@@ -56,29 +61,29 @@ esac
 #force_color_prompt=yes
 
 if [ -n "$force_color_prompt" ]; then
-    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-	# We have color support; assume it's compliant with Ecma-48
-	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-	# a case would tend to support setf rather than setaf.)
-	color_prompt=yes
-    else
-	color_prompt=
-    fi
+  if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
+	  # We have color support; assume it's compliant with Ecma-48
+	  # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+	  # a case would tend to support setf rather than setaf.)
+	  color_prompt=yes
+  else
+	  color_prompt=
+  fi
 fi
 
 if [ "$color_prompt" = yes ]; then
-    PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+  PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 else
-    PS1='\u@\h:\w\$ '
+  PS1='\u@\h:\w\$ '
 fi
 unset color_prompt force_color_prompt
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
-xterm*|rxvt*)
+  xterm*|rxvt*)
     PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD/$HOME/~}\007"'
     ;;
-*)
+  *)
     ;;
 esac
 
@@ -86,7 +91,7 @@ esac
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
 if [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
+  . /etc/bash_completion
 fi
 
 # Set RWX permissions only for user and group
@@ -94,8 +99,9 @@ umask 007
 
 # Load RVM function
 if [ -s "$HOME/.rvm/scripts/rvm" ]; then
-   . "$HOME/.rvm/scripts/rvm"
+  . "$HOME/.rvm/scripts/rvm"
 fi
 
 # Disable XON/XOFF flow control since it interferes with some BASH key bindings
 stty -ixon
+

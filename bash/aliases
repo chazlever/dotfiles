@@ -25,9 +25,3 @@ if [ ! -z $(which vim) ] && [ -f "${HOME}/.bin/less.sh" ]; then
   alias less="${HOME}/.bin/less.sh"
 fi
 
-# Add ssh/scp aliases for connecting over a proxy
-if [ ! -z $(which nc) ]; then
-  alias pssh='ssh -o "ProxyCommand nc -x localhost:8080 %h %p"'
-  alias pscp='scp -o "ProxyCommand nc -x localhost:8080 %h %p"'
-fi
-

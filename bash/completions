@@ -1,13 +1,6 @@
 #!/bin/bash
 
 # Add bash completion for ssh/scp aliases
-alias pssh &> /dev/null
-if [ $? == 0 ]; then
-   complete -F _ssh pssh
-fi
-
-alias pscp &> /dev/null
-if [ $? == 0 ]; then
-   complete -F _scp pscp
-fi
+complete -F _ssh pssh
+complete -F _scp pscp
 
