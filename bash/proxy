@@ -90,7 +90,7 @@ pssh() {
     return 1
   fi
 
-  PROXY_SSH="ssh -o 'ProxyCommand nc -x localhost:${PORT} %h %p' $1"
+  PROXY_SSH="ssh -o 'ProxyCommand nc -x localhost:${PORT} %h %p' $@"
   eval ${PROXY_SSH}
 }
 
