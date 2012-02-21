@@ -125,8 +125,10 @@ endfunction
 map <silent> <Leader>n <Esc>:call ToggleLineNumber()<CR>
 
 " Toggle ctags plugin
-map <silent> <Leader>c <Esc>:TlistToggle<CR>
-let Tlist_WinWidth=50
+if !empty(system('which ctags'))
+   map <silent> <Leader>c <Esc>:TlistToggle<CR>
+   let Tlist_WinWidth=50
+endif
 
 " Toggle word wrap
 function ToggleWordWrap()
@@ -137,3 +139,6 @@ function ToggleWordWrap()
   endif
 endfunction
 map <silent> <Leader>w <Esc>:call ToggleWordWrap()<CR>
+
+" Toggle ctags plugin
+map <silent> <Leader>c <Esc>:TlistToggle<CR>
