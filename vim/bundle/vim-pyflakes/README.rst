@@ -57,10 +57,18 @@ Hacking
   cd pyflakes-vim
   git clone git://github.com/kevinw/pyflakes.git
 
+or use the PyFlakes_ submodule::
+
+  git clone git://github.com/kevinw/pyflakes-vim.git
+  cd pyflakes-vim
+  git submodule init
+  git submodule update
+ 
+
 Options
 -------
 
-Set this option to you vimrc file to disable quickfix support::
+Set this option in your vimrc file to disable quickfix support::
     
     let g:pyflakes_use_quickfix = 0
 
@@ -72,7 +80,7 @@ TODO
  * configuration variables
  * parse or intercept useful output from the warnings module
 
-.. _signs: http://www.vim.org/htmldoc/sign.html
+.. _signs: http://vimdoc.sourceforge.net/htmldoc/sign.html
 
 Changelog
 ---------
