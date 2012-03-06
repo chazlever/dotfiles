@@ -3,13 +3,13 @@
 # Author: Chaz Lever
 # Date: 06/25/2011
 
-# If not running interactively, don't do anything
-[ -z "${PS1}" ] && return
-
 # Add new items to path from ~/.bash/paths
 if [ -f ~/.bash/path_helper ]; then
   . ~/.bash/path_helper
 fi
+
+# If not running interactively, don't do anything
+[ -z "${PS1}" ] && return
 
 # Add new SSH proxy functions
 if [ -f ~/.bash/proxy ]; then
@@ -41,62 +41,56 @@ if [ -f ~/.localrc ]; then
   . ~/.localrc
 fi
 
-# don't put duplicate lines in the history. See bash(1) for more options
-export HISTCONTROL=ignoredups
+if [ ! -z "$TERM" ]; then
+  # don't put duplicate lines in the history. See bash(1) for more options
+  export HISTCONTROL=ignoredups
 
-# check the window size after each command and, if necessary,
-# update the values of LINES and COLUMNS.
-shopt -s checkwinsize
-shopt -s cdspell
+  # check the window size after each command and, if necessary,
+  # update the values of LINES and COLUMNS.
+  shopt -s checkwinsize
+  shopt -s cdspell
 
-# set a fancy prompt (non-color, unless we know we "want" color)
-case "$TERM" in
-  screen-256color | xterm-256color | xterm-color)
-    color_prompt=yes;;
-esac
+  # Disable XON/XOFF flow control since it interferes with some BASH key
+  # bindings
+  stty -ixon
 
-if [ -n "$force_color_prompt" ]; then
-  if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-	  # We have color support; assume it's compliant with Ecma-48
-	  # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-	  # a case would tend to support setf rather than setaf.)
-	  color_prompt=yes
+  # set a fancy prompt (non-color, unless we know we "want" color)
+  case "$TERM" in
+    screen-256color | xterm-256color | xterm-color)
+      color_prompt=yes;;
+  esac
+
+  # If this is an xterm set the title to user@host:dir
+  case "$TERM" in
+    xterm*|rxvt*)
+      PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD/$HOME/~}\007"'
+      ;;
+    *)
+      ;;
+  esac
+
+  # Check for color support and set prompt accordingly
+  tput=$(which tput)
+  if [ ! -z ${tput} ] && ${tput} setaf 1 >&/dev/null; then
+    PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
   else
-	  color_prompt=
+    PS1='\u@\h:\w\$ '
   fi
+  unset color_prompt tput
 fi
 
-if [ "$color_prompt" = yes ]; then
-  PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-else
-  PS1='\u@\h:\w\$ '
-fi
-unset color_prompt force_color_prompt
-
-# If this is an xterm set the title to user@host:dir
-case "$TERM" in
-  xterm*|rxvt*)
-    PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD/$HOME/~}\007"'
-    ;;
-  *)
-    ;;
-esac
-
-# enable programmable completion features (you don't need to enable this, if
-# it's already enabled in /etc/bash.bashrc and /etc/profile sources
-# /etc/bash.bashrc).
+# Make sure that bash completion is enabled
 if [ -s /etc/bash_completion ]; then
   . /etc/bash_completion
+elif [ -s /usr/local/etc/bash_completion ]; then
+  . /usr/local/etc/bash_completion
+fi
+
+# Load RVM if it is installed
+if [ -s "{$HOME}/.rvm/scripts/rvm" ]; then
+  . "${HOME}/.rvm/scripts/rvm"
 fi
 
 # Set RWX permissions only for user and group
 umask 007
-
-# Load RVM if it is installed
-if [ -s "$HOME/.rvm/scripts/rvm" ]; then
-  . "$HOME/.rvm/scripts/rvm"
-fi
-
-# Disable XON/XOFF flow control since it interferes with some BASH key bindings
-stty -ixon
 
