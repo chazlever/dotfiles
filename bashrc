@@ -43,22 +43,17 @@ fi
 
 # don't put duplicate lines in the history. See bash(1) for more options
 export HISTCONTROL=ignoredups
-# ... and ignore same sucessive entries.
-export HISTCONTROL=ignoreboth
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
+shopt -s cdspell
 
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
-  xterm-color) color_prompt=yes;;
+  screen-256color | xterm-256color | xterm-color)
+    color_prompt=yes;;
 esac
-
-# uncomment for a colored prompt, if the terminal has the capability; turned
-# off by default to not distract the user: the focus in a terminal window
-# should be on the output of commands, not on the prompt
-#force_color_prompt=yes
 
 if [ -n "$force_color_prompt" ]; then
   if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
@@ -87,17 +82,17 @@ case "$TERM" in
     ;;
 esac
 
-# enable programmable completion features (you don't need to enable
-# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
-# sources /etc/bash.bashrc).
-if [ -f /etc/bash_completion ]; then
+# enable programmable completion features (you don't need to enable this, if
+# it's already enabled in /etc/bash.bashrc and /etc/profile sources
+# /etc/bash.bashrc).
+if [ -s /etc/bash_completion ]; then
   . /etc/bash_completion
 fi
 
 # Set RWX permissions only for user and group
 umask 007
 
-# Load RVM function
+# Load RVM if it is installed
 if [ -s "$HOME/.rvm/scripts/rvm" ]; then
   . "$HOME/.rvm/scripts/rvm"
 fi
