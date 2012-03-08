@@ -22,8 +22,9 @@ alias pdb='python -m pdb' # add quick alias for python debugger
 
 # Collection of tmux aliases
 alias ta='tmux attach-session -t'
-alias tn='tmux new-session -s'
 alias tl='tmux list-sessions'
+alias tn='tmux new-session -s'
+alias ts='tmux switch -t'
 
 # Use vim instead of less
 if [ ! -z $(which vim) ] && [ -f "${HOME}/.bin/less.sh" ]; then
