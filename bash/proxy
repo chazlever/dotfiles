@@ -2,72 +2,66 @@
 
 proxy() {
   local OPTIND OPTARG USAGE PORT PROXY_SOCKS PID
-  
-  USAGE="Usage: proxy [-h] [-p port] hostname"
+
+  USAGE="usage: proxy [-p port] hostname"
 
   # Set defaults
   PORT=8080
-  
+
   # Parse command line options
-  while getopts hp: OPT; do
+  while getopts :p: OPT; do
     case "${OPT}" in
-      h)
-        echo ${USAGE}
-        return 0
-        ;;
       p)
         PORT=${OPTARG}
         ;;
       \?)
+        echo proxy: illegal option -- ${OPTARG}
         echo ${USAGE} >&2
         return 1
         ;;
     esac
   done
-  
+
   # We want at least one non-option argument
   shift $(expr ${OPTIND} - 1)
   if [ $# -eq 0 ]; then
     echo $USAGE >&2
     return 1
   fi
-  
+
   PROXY_SOCKS="ssh -fND ${PORT}"
-  
+
   # Make sure we kill any existing connections
   PID=$(psgrep -n ${PROXY_SOCKS} | head -n1 | awk '{ print $2 }')
   if [ ! -z ${PID} ]; then
     kill ${PID}
   fi
-  
+
   eval "${PROXY_SOCKS} $1"
 }
 
 
 pssh() {
   local OPTIND OPTARG USAGE PORT PROXY_SOCKS PROXY_SSH
-  
+
   if [ -z $(which nc) ]; then
     echo "error: netcat required" >&2
     return 1
   fi
-  
-  USAGE="Usage: pssh [-h] [-p port] host"
+
+  USAGE="usage: pssh [-p port] host"
 
   # Set defaults
   PORT=8080
 
   # Parse command line options
-  while getopts hp: OPT; do
+  while getopts :p: OPT; do
     case "${OPT}" in
-      h)
-        echo ${USAGE}
-        return 0
-        ;;
       p)
         PORT=${OPTARG}
         ;;
       \?)
+        echo pssh: illegal option -- ${OPTARG}
         echo ${USAGE} >&2
         return 1
         ;;
@@ -96,25 +90,23 @@ pssh() {
 
 
 pscp() {
-  local OPTIND OPTARG USAGE RECURSIVE PORT PROXY_SOCKS PROXY_SCP
-  
+  local OPTIND OPTARG OPTS USAGE RECURSIVE PORT PROXY_SOCKS PROXY_SCP
+
   if [ -z $(which nc) ]; then
     echo "error: netcat required" >&2
     return 1
   fi
-  
-  USAGE="Usage: pscp [-h] [-r] [-p port] [[user@]host1:]file1 ... [[user@]host2:]file2"
+
+  OPTS="[-r]"
+  VOPTS="[-p port]"
+  USAGE="usage: pscp ${OPTS} ${VOPTS} [[user@]host1:]file1 ... [[user@]host2:]file2"
 
   # Set defaults
   PORT=8080
 
   # Parse command line options
-  while getopts hrp: OPT; do
+  while getopts :rp: OPT; do
     case "${OPT}" in
-      h)
-        echo ${USAGE}
-        return 0
-        ;;
       p)
         PORT=${OPTARG}
         ;;
@@ -122,12 +114,13 @@ pscp() {
         RECURSIVE='-r'
         ;;
       \?)
+        echo pscp: illegal option -- ${OPTARG}
         echo ${USAGE} >&2
         return 1
         ;;
     esac
   done
-  
+
   # We want at least one non-option argument
   shift $(expr ${OPTIND} - 1)
   if [ $# -eq 0 ]; then
