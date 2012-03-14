@@ -29,7 +29,6 @@ path_helper() {
 
 path_helper "${HOME}/.bash/paths" "PATH"
 path_helper "${HOME}/.pathrc" "PATH"
-path_helper "${HOME}/.bash/pythonpaths" "PYTHONPATH"
 path_helper "${HOME}/.pythonpathrc" "PYTHONPATH"
 
 unset path_helper

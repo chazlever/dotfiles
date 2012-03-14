@@ -96,20 +96,20 @@ pssh() {
 
 
 pscp() {
-  local OPTIND OPTARG USAGE PORT PROXY_SOCKS PROXY_SCP
+  local OPTIND OPTARG USAGE RECURSIVE PORT PROXY_SOCKS PROXY_SCP
   
   if [ -z $(which nc) ]; then
     echo "error: netcat required" >&2
     return 1
   fi
   
-  USAGE="Usage: pscp [-h] [-p port] [[user@]host1:]file1 ... [[user@]host2:]file2"
+  USAGE="Usage: pscp [-h] [-r] [-p port] [[user@]host1:]file1 ... [[user@]host2:]file2"
 
   # Set defaults
   PORT=8080
 
   # Parse command line options
-  while getopts hp: OPT; do
+  while getopts hrp: OPT; do
     case "${OPT}" in
       h)
         echo ${USAGE}
@@ -117,6 +117,9 @@ pscp() {
         ;;
       p)
         PORT=${OPTARG}
+        ;;
+      r)
+        RECURSIVE='-r'
         ;;
       \?)
         echo ${USAGE} >&2
@@ -141,7 +144,7 @@ pscp() {
     return 1
   fi
 
-  PROXY_SCP="scp -o 'ProxyCommand nc -x localhost:${PORT} %h %p' $@"
+  PROXY_SCP="scp -o 'ProxyCommand nc -x localhost:${PORT} %h %p' ${RECURSIVE} $@"
   eval ${PROXY_SCP}
 }
 
