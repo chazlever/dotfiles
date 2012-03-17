@@ -1,20 +1,20 @@
 #!/bin/bash
 # The following code is a modified version of Sam Rowe's solution to using
-# SSH-Agent and a terimnal multiplexer which can be found at the following:
+# SSH-Agent and a terminal multiplexer which can be found at the following:
 # http://www.deadman.org/sshscreen.php
 
-SSHVARS="SSH_CLIENT SSH_TTY SSH_AUTH_SOCK SSH_CONNECTION DISPLAY"
+TMPDIR="${HOME}/.tmp"
+FIXSSH="${TMPDIR}/fixssh"
+mkdir -p "${TMPDIR}"
 
-# Dynamically create a function called fixssh()
-FUNCTION="fixssh() { "
+SSHVARS="SSH_CLIENT SSH_TTY SSH_AUTH_SOCK SSH_CONNECTION DISPLAY"
 for x in ${SSHVARS}; 
 do
-  FUNCTION="${FUNCTION}$((eval echo $x=\"\$$x\") | \
+  (eval echo $x=\"\$$x\") | \
   sed 's/=/="/
        s/$/"/
-       s/^/export /'); "
-done #1>$HOME/bin/fixssh
-FUNCTION="${FUNCTION}}"
-eval "${FUNCTION}"
+       s/^/export /'
+done 1>"${FIXSSH}"
 
-unset FUNCTION SSHVARS
+alias fixssh="source ${FIXSSH}"
+unset TMPDIR FIXSSH SSHVARS
