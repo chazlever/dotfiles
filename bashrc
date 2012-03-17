@@ -31,6 +31,11 @@ if [ -f ~/.bash/bashmarks ]; then
   . ~/.bash/bashmarks
 fi
 
+# Add new fixssh() function for terminal multiplexers
+if [ -f ~/.bash/grabssh ]; then
+  . ~/.bash/grabssh
+fi
+
 # Add any new auto completions to this file
 if [ -f ~/.bash/completions ]; then
   . ~/.bash/completions
