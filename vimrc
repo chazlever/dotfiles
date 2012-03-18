@@ -40,14 +40,9 @@ colorscheme topfunky-light
 " Define the characters to use for hidden characters
 set nolist listchars=tab:>-,trail:.,nbsp:%,eol:$
 
-" Useful status information at bottom of screen
-set statusline=[%n]\ %<%.99f\ %h%w%m%r%y\ %{fugitive#statusline()}%{exists('*CapsLockStatusline')?CapsLockStatusline():''}%=%-16(\ %l,%c-%v\ %)%P
-
 "------------------------------------------------------------------------------
 " ENABLE PLUGINS
 "------------------------------------------------------------------------------
-
-runtime macros/matchit.vim        " Load the matchit plugin.
 
 " To disable a plugin, add it's bundle name to the following list
 let g:pathogen_disabled = []
@@ -139,6 +134,3 @@ function ToggleWordWrap()
   endif
 endfunction
 map <silent> <Leader>w <Esc>:call ToggleWordWrap()<CR>
-
-" Toggle ctags plugin
-map <silent> <Leader>c <Esc>:TlistToggle<CR>
