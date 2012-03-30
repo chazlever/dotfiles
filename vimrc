@@ -59,7 +59,7 @@ if !has('python')
    call add(g:pathogen_disabled, 'vim-pyflakes')
 endif
 
-silent! call pathogen#runtime_append_all_bundles()
+call pathogen#infect()
 
 "------------------------------------------------------------------------------
 " SET KEY MAPPINGS
