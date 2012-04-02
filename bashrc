@@ -92,7 +92,7 @@ elif [ -s /usr/local/etc/bash_completion ]; then
 fi
 
 # Load RVM if it is installed
-if [ -s "{$HOME}/.rvm/scripts/rvm" ]; then
+if [ -s "${HOME}/.rvm/scripts/rvm" ]; then
   . "${HOME}/.rvm/scripts/rvm"
 fi
 
