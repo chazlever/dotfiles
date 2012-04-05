@@ -55,10 +55,6 @@ if !has('gui_macvim')
   call add(g:pathogen_disabled, 'vim-peepopen')
 endif
 
-if !has('python')
-   call add(g:pathogen_disabled, 'vim-pyflakes')
-endif
-
 call pathogen#infect()
 
 "------------------------------------------------------------------------------
