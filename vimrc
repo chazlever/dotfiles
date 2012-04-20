@@ -33,9 +33,8 @@ set expandtab                     " Use spaces instead of tabs
 set smarttab                      " Insert tabs according to tabstop, shiftwidth, and expandtab
 set autoindent                    " Copy indentation from previous line
 set laststatus=2                  " Show the status line all the time
-syntax enable                     " Turn on syntax highlighting.
 filetype plugin indent on         " Turn on file type detection.
-colorscheme topfunky-light
+syntax enable                     " Turn on syntax highlighting.
 
 " Define the characters to use for hidden characters
 set nolist listchars=tab:>-,trail:.,nbsp:%,eol:$
@@ -56,6 +55,18 @@ if !has('gui_macvim')
 endif
 
 call pathogen#infect()
+
+"------------------------------------------------------------------------------
+" CONFIGURE SOLARIZED COLOR SCHEME
+"------------------------------------------------------------------------------
+
+if !has('gui_macvim')
+   let g:solarized_termcolors=256
+   let g:solarized_termtrans=1
+endif
+
+colorscheme solarized
+set background=dark
 
 "------------------------------------------------------------------------------
 " CONFIGURE PLUGIN OPTIONS
