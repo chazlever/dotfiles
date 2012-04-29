@@ -9,8 +9,7 @@ if [ -f ~/.bash/path_helper ]; then
 fi
 
 # If not running interactively, don't do anything
-[ -z "${PS1}" ] && return
-
+[ -z "${PS1}" ] && return 
 # Add new SSH proxy functions
 if [ -f ~/.bash/proxy ]; then
   . ~/.bash/proxy
@@ -77,9 +76,9 @@ if [ ! -z "$TERM" ]; then
   # Check for color support and set prompt accordingly
   tput=$(which tput)
   if [ ! -z ${tput} ] && ${tput} setaf 1 >&/dev/null; then
-    PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\W \[\033[33m\]⚡\[\033[00m\] '
+    PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w \[\033[33m\]⚡\[\033[00m\] '
   else
-    PS1='\u@\h:\W ⚡ '
+    PS1='\u@\h:\w ⚡ '
   fi
   unset color_prompt tput
 fi

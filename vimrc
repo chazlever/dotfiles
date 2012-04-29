@@ -57,16 +57,10 @@ endif
 call pathogen#infect()
 
 "------------------------------------------------------------------------------
-" CONFIGURE SOLARIZED COLOR SCHEME
+" CONFIGURE COLOR SCHEME
 "------------------------------------------------------------------------------
 
-if !has('gui_macvim')
-   let g:solarized_termcolors=256
-   let g:solarized_termtrans=1
-endif
-
-colorscheme solarized
-set background=dark
+colorscheme topfunky-light
 
 "------------------------------------------------------------------------------
 " CONFIGURE PLUGIN OPTIONS
