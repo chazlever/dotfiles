@@ -61,6 +61,7 @@ call pathogen#infect()
 "------------------------------------------------------------------------------
 
 colorscheme topfunky-light
+set background=dark
 
 "------------------------------------------------------------------------------
 " CONFIGURE PLUGIN OPTIONS
