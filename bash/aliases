@@ -26,8 +26,3 @@ alias tl='tmux list-sessions'
 alias tn='tmux new-session -s'
 alias ts='tmux switch -t'
 
-# Use vim instead of less
-if [ ! -z $(which vim) ] && [ -f "${HOME}/.bin/less.sh" ]; then
-  alias less="${HOME}/.bin/less.sh"
-fi
-
