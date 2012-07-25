@@ -1,5 +1,7 @@
 #!/bin/bash
 
+export LESS="-R"
+
 if [ ! -z $(which vim) ]; then
   # Set the default text editor to vim
   export EDITOR=vim
