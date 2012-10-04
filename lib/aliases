@@ -4,23 +4,23 @@ if [ "$(echo $(uname) | tr A-Z a-z)" = "darwin" ]; then
   COLOR='-G'
 fi
 
-alias ls="ls ${COLOR}"  # enable colorized listings
-alias l.='ls -d .*'     # list hidden files
-alias ll.='ls -ld .*'   # long listing of hidden files
-alias ll='ls -lh'       # long listing of files
-alias la='ls -lha'      # list all files 
-alias lA='ls -lhA'      # list all files (including . and ..)
-alias lsd='ls -Ud'      # list directories as files
-alias lld='ls -lUd'     # long listing of directories as files
+alias ls="ls -h ${COLOR}"  # enable colorized listings
+alias ls.='ls -d .*'       # list hidden files
+alias lsa='ls -la'         # list all files 
+alias ll='ls -l'           # long listing of files
+alias ll.='ls -ld .*'      # long listing of hidden files
+alias lla='ls -la'         # long list of all files
+alias lsd='ls -Ud'         # list directories as files
+alias lld='ls -lUd'        # long listing of directories as files
 
 alias grep='grep --color'   # enable colorized results
 alias egrep='egrep --color' # enable colorized results
 alias fgrep='fgrep --color' # enable colorized results
-alias pdb='python -m pdb' # add quick alias for python debugger
 
-# Collection of tmux aliases
-alias ta='tmux attach-session -t'
-alias tl='tmux list-sessions'
-alias tn='tmux new-session -s'
-alias ts='tmux switch -t'
+alias pdb='python -m pdb'   # add quick alias for python debugger
+
+alias ta='tmux attach-session -t'   # attach to tmux session
+alias tl='tmux list-sessions'       # list active tmux sessions
+alias tn='tmux new-session -s'      # create new tmux session
+alias ts='tmux switch -t'           # switch between active sessions
 

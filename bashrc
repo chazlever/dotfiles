@@ -1,5 +1,3 @@
-#!/bin/bash
-#
 # Author: Chaz Lever
 # Date: 06/25/2011
 
@@ -26,14 +24,14 @@ if [ -f ~/.lib/aliases ]; then
   . ~/.lib/aliases
 fi
 
-# Add the bashmarks script to this file
-if [ -f ~/.lib/bashmarks ]; then
-  . ~/.lib/bashmarks
-fi
-
 # Add new fixssh() function for terminal multiplexers
 if [ -f ~/.lib/grabssh ]; then
   . ~/.lib/grabssh
+fi
+
+# Add the bashmarks script to this file
+if [ -f ~/.bash/bashmarks ]; then
+  . ~/.bash/bashmarks
 fi
 
 # Add any new auto completions to this file
@@ -98,4 +96,3 @@ fi
 
 # Set RWX permissions only for user and group
 umask 007
-

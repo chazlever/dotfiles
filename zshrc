@@ -47,11 +47,6 @@ if [ -f ~/.lib/aliases ]; then
   . ~/.lib/aliases
 fi
 
-# Add the bashmarks script to this file
-if [ -f ~/.lib/bashmarks ]; then
-  . ~/.lib/bashmarks
-fi
-
 # Add new fixssh() function for terminal multiplexers
 if [ -f ~/.lib/grabssh ]; then
   . ~/.lib/grabssh
