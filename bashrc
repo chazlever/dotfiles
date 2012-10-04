@@ -3,36 +3,37 @@
 # Author: Chaz Lever
 # Date: 06/25/2011
 
-# Add new items to path from ~/.bash/paths
-if [ -f ~/.bash/path_helper ]; then
-  . ~/.bash/path_helper
+# Add new items to path from ~/.lib/paths
+if [ -f ~/.lib/path_helper ]; then
+  . ~/.lib/path_helper
 fi
 
 # If not running interactively, don't do anything
 [ -z "${PS1}" ] && return 
+
 # Add new SSH proxy functions
-if [ -f ~/.bash/proxy ]; then
-  . ~/.bash/proxy
+if [ -f ~/.lib/proxy ]; then
+  . ~/.lib/proxy
 fi
 
 # Add any new exports to this file
-if [ -f ~/.bash/exports ]; then
-  . ~/.bash/exports
+if [ -f ~/.lib/exports ]; then
+  . ~/.lib/exports
 fi
 
 # Add any new aliases to this file
-if [ -f ~/.bash/aliases ]; then
-  . ~/.bash/aliases
+if [ -f ~/.lib/aliases ]; then
+  . ~/.lib/aliases
 fi
 
 # Add the bashmarks script to this file
-if [ -f ~/.bash/bashmarks ]; then
-  . ~/.bash/bashmarks
+if [ -f ~/.lib/bashmarks ]; then
+  . ~/.lib/bashmarks
 fi
 
 # Add new fixssh() function for terminal multiplexers
-if [ -f ~/.bash/grabssh ]; then
-  . ~/.bash/grabssh
+if [ -f ~/.lib/grabssh ]; then
+  . ~/.lib/grabssh
 fi
 
 # Add any new auto completions to this file

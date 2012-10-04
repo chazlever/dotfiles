@@ -1,5 +1,3 @@
-#!/bin/bash
-
 export LESS="-R"
 
 if [ ! -z $(which vim) ]; then

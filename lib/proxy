@@ -1,5 +1,3 @@
-#!/bin/bash
-
 proxy() {
   local OPTIND OPTARG USAGE PORT PROXY_SOCKS PID
 

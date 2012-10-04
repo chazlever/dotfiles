@@ -1,5 +1,3 @@
-#!/bin/bash
-
 # Get the color flag depending on OS
 COLOR='--color'
 if [ "$(echo $(uname) | tr A-Z a-z)" = "darwin" ]; then
