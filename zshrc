@@ -56,7 +56,8 @@ fi
 # Add the bashmarks script to this file
 if [ -f ~/.bash/bashmarks ]; then
   . ~/.bash/bashmarks
-   unalias l
+  unalias d
+  unalias l
 fi
 
 # Add any local customizations
