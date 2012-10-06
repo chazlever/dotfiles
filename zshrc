@@ -1,11 +1,12 @@
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
+ZSH_CUSTOM=$HOME/.zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="robbyrussell"
+ZSH_THEME="lightning"
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
@@ -50,6 +51,12 @@ fi
 # Add new fixssh() function for terminal multiplexers
 if [ -f ~/.lib/grabssh ]; then
   . ~/.lib/grabssh
+fi
+
+# Add the bashmarks script to this file
+if [ -f ~/.bash/bashmarks ]; then
+  . ~/.bash/bashmarks
+   unalias l
 fi
 
 # Add any local customizations
