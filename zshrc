@@ -30,13 +30,23 @@ plugins=(brew gem osx pip redis-cli rvm)
 
 source $ZSH/oh-my-zsh.sh
 
+# Configure the title for xterm sessions
+case $TERM in
+  xterm*)
+    DISABLE_AUTO_TITLE="true"
+    precmd () {
+       # TAB TITLE
+       echo -ne "\e]1;${PWD/#$HOME/~}\a"
+       # WINDOW TITLE
+       echo -ne "\e]2;${USER}@$(hostname -s) : ${PWD/#$HOME/~}\a"
+    }
+  ;;
+esac
+
 # Add new items to path from ~/.lib/paths
 if [ -f ~/.lib/path_helper ]; then
   . ~/.lib/path_helper
 fi
-
-# If not running interactively, don't do anything
-[ -z "${PS1}" ] && return 
 
 # Add new SSH proxy functions
 if [ -f ~/.lib/proxy ]; then
