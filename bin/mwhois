@@ -1,3 +1,31 @@
 #!/bin/bash
 
-whois -h whois.cymru.com " -v $1"
+_USAGE="usage: $(basename $0) [-r] QUERY"
+
+_DOMAIN=0
+while getopts ":rh" opt; do
+  case $opt in
+    r)
+      _DOMAIN=1
+      ;;
+    h)
+      echo "${_USAGE}"
+      exit
+      ;;
+    \?)
+      echo "$(basename $0): illegal option -- $OPTARG"
+      echo "${_USAGE}"
+      exit 1
+      ;;
+  esac
+done
+
+shift $((OPTIND-1))
+
+if [ "${_DOMAIN}" -gt 0 ]; then
+  _HOST="$(dig @8.8.8.8 $1 A +noall +answer | tail -n1 | awk '{ print $5 }')"
+else
+  _HOST="$1"
+fi
+
+whois -h whois.cymru.com " -v ${_HOST}"
