@@ -73,10 +73,10 @@ pssh() {
     return 1
   fi
 
-  PROXY_SOCKS="ssh -fND ${PORT}"
+  PROXY_SOCKS="ssh.*-fND ?${PORT}.*"
 
-  # Make sure we kill any existing connections
-  PID=$(psgrep -n ${PROXY_SOCKS} | head -n1 | awk '{ print $2 }')
+  # Check for existing proxy on specified port
+  PID=$(psgrep -en "${PROXY_SOCKS}" | head -n1 | awk '{ print $2 }')
   if [ -z ${PID} ]; then
     echo "error: no proxy running on port ${PORT}" >&2
     return 1
