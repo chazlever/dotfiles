@@ -7,7 +7,7 @@ proxy() {
   PORT=8080
 
   # Parse command line options
-  while getopts :p: OPT; do
+  while getopts "p:" OPT; do
     case "${OPT}" in
       p)
         PORT=${OPTARG}
@@ -47,17 +47,20 @@ pssh() {
     return 1
   fi
 
-  USAGE="usage: pssh [-p port] host"
+  USAGE="usage: pssh [-X] [-p port] host"
 
   # Set defaults
   PORT=8080
 
   # Parse command line options
-  while getopts :p: OPT; do
+  while getopts "p:X" OPT; do
     case "${OPT}" in
       p)
         PORT=${OPTARG}
         ;;
+      X)
+         X11="-X"
+         ;;
       \?)
         echo pssh: illegal option -- ${OPTARG}
         echo ${USAGE} >&2
@@ -82,7 +85,7 @@ pssh() {
     return 1
   fi
 
-  PROXY_SSH="ssh -o 'ProxyCommand nc -x localhost:${PORT} %h %p' $@"
+  PROXY_SSH="ssh ${X11} -o 'ProxyCommand nc -x localhost:${PORT} %h %p' $@"
   eval ${PROXY_SSH}
 }
 
@@ -103,7 +106,7 @@ pscp() {
   PORT=8080
 
   # Parse command line options
-  while getopts :rp: OPT; do
+  while getopts "rp:" OPT; do
     case "${OPT}" in
       p)
         PORT=${OPTARG}
