@@ -1,5 +1,5 @@
 # Get the color flag depending on OS
-COLOR='--color'
+COLOR='--color=auto'
 if [ "$(echo $(uname) | tr A-Z a-z)" = "darwin" ]; then
   COLOR='-G'
 fi
