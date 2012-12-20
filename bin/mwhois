@@ -3,11 +3,8 @@
 _USAGE="usage: $(basename $0) [-r] QUERY"
 
 _DOMAIN=0
-while getopts ":rh" opt; do
+while getopts ":h" opt; do
   case $opt in
-    r)
-      _DOMAIN=1
-      ;;
     h)
       echo "${_USAGE}"
       exit
@@ -22,10 +19,15 @@ done
 
 shift $((OPTIND-1))
 
-if [ "${_DOMAIN}" -gt 0 ]; then
+if [ -z "$(echo $1 | grep -Eo '^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$')" ]; then
   _HOST="$(dig @8.8.8.8 $1 A +noall +answer | tail -n1 | awk '{ print $5 }')"
 else
   _HOST="$1"
 fi
 
-whois -h whois.cymru.com " -v ${_HOST}"
+if [ -z "${_HOST}" ]; then
+  echo "error: could not resolve domain: $1" 1>&2
+  exit 1
+else
+  whois -h whois.cymru.com " -v ${_HOST}"
+fi
