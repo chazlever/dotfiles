@@ -1,6 +1,6 @@
 #!/bin/bash
 
-_USAGE="usage: $(basename $0) [-r] QUERY"
+_USAGE="usage: $(basename $0) [-h] {DOMAIN, IP}"
 
 _DOMAIN=0
 while getopts ":h" opt; do
@@ -18,6 +18,11 @@ while getopts ":h" opt; do
 done
 
 shift $((OPTIND-1))
+
+if [ -z "$1" ]; then
+  echo "${_USAGE}"
+  exit 1
+fi
 
 if [ -z "$(echo $1 | grep -Eo '^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$')" ]; then
   _HOST="$(dig @8.8.8.8 $1 A +noall +answer | tail -n1 | awk '{ print $5 }')"
