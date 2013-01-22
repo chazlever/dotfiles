@@ -6,9 +6,6 @@
 "
 "============================================================================
 function! SyntaxCheckers_python_GetHighlightRegex(i)
-    if a:i['type'] ==# 'E'
-        let a:i['text'] = "Syntax error"
-    endif
     if match(a:i['text'], 'is assigned to but never used') > -1
                 \ || match(a:i['text'], 'imported but unused') > -1
                 \ || match(a:i['text'], 'undefined name') > -1
@@ -25,7 +22,10 @@ function! SyntaxCheckers_python_GetHighlightRegex(i)
 endfunction
 
 function! SyntaxCheckers_python_GetLocList()
-    let makeprg = 'flake8 '.g:syntastic_python_checker_args.' '.shellescape(expand('%'))
-    let errorformat = '%E%f:%l: could not compile,%-Z%p^,%E%f:%l:%c: %m,%E%f:%l: %m,%-G%.%#'
+    let makeprg = syntastic#makeprg#build({
+                \ 'exe': 'flake8',
+                \ 'args': g:syntastic_python_checker_args,
+                \ 'subchecker': 'flake8' })
+    let errorformat = '%E%f:%l: could not compile,%-Z%p^,%E%f:%l:%c: %t%n %m,%E%f:%l: %t%n %m,%-G%.%#'
     return SyntasticMake({ 'makeprg': makeprg, 'errorformat': errorformat })
 endfunction

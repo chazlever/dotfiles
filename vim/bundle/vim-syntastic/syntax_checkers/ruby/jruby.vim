@@ -10,7 +10,20 @@
 "
 "============================================================================
 function! SyntaxCheckers_ruby_GetLocList()
-    "let makeprg = ''
-    "let errorformat =  ''
-    "return SyntasticMake({ 'makeprg': makeprg, 'errorformat': errorformat })
+    let makeprg = syntastic#makeprg#build({
+                \ 'exe': s:exe(),
+                \ 'args': s:args(),
+                \ 'subchecker': 'jruby' })
+
+    let errorformat =  '%-GSyntax OK for %f,%ESyntaxError in %f:%l: syntax error\, %m,%Z%p^,%W%f:%l: warning: %m,%Z%p^,%W%f:%l: %m,%-C%.%#'
+
+    return SyntasticMake({ 'makeprg': makeprg, 'errorformat': errorformat })
+endfunction
+
+function s:args()
+    return has('win32') ? '-W1 -T1 -c' : '-W1 -c'
+endfunction
+
+function s:exe()
+    return has('win32') ? 'jruby' : 'RUBYOPT= jruby'
 endfunction
