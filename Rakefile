@@ -16,10 +16,23 @@ task :install do
       end
     end
   end
+
+  # Update git submodules
+  update()
   
   # Link files to user home directory
   replace_all = link_dir('.', false)
   link_dir('erb', replace_all)
+end
+
+desc "Update dot files from git repository."
+task :update do
+   system('git pull origin master')
+   update()
+end
+
+def update()
+   system('git submodule foreach git pull origin master')
 end
 
 def link_dir(dir, replace_all = false)
