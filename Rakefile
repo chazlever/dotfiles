@@ -17,7 +17,9 @@ task :install do
     end
   end
 
-  # Update git submodules
+  # Initialize and update git submodules
+  system('git submodule init')
+  system('git submodule update')
   update()
   
   # Link files to user home directory
