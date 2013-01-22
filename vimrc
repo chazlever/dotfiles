@@ -33,8 +33,6 @@ set expandtab                     " Use spaces instead of tabs
 set smarttab                      " Insert tabs according to tabstop, shiftwidth, and expandtab
 set autoindent                    " Copy indentation from previous line
 set laststatus=2                  " Show the status line all the time
-filetype plugin indent on         " Turn on file type detection.
-syntax enable                     " Turn on syntax highlighting.
 
 " Define the characters to use for hidden characters
 set nolist listchars=tab:>-,trail:.,nbsp:%,eol:$
@@ -46,6 +44,8 @@ endif
 "------------------------------------------------------------------------------
 " ENABLE PLUGINS
 "------------------------------------------------------------------------------
+
+runtime bundle/vim-pathogen/autoload/pathogen.vim
 
 " To disable a plugin, add it's bundle name to the following list
 let g:pathogen_disabled = []
@@ -59,6 +59,10 @@ if !has('gui_macvim')
 endif
 
 call pathogen#infect()
+call pathogen#helptags()
+
+filetype plugin indent on         " Turn on file type detection.
+syntax enable                     " Turn on syntax highlighting.
 
 "------------------------------------------------------------------------------
 " CONFIGURE COLOR SCHEME
