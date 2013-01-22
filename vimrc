@@ -39,6 +39,10 @@ syntax enable                     " Turn on syntax highlighting.
 " Define the characters to use for hidden characters
 set nolist listchars=tab:>-,trail:.,nbsp:%,eol:$
 
+if has('mouse')
+   set mouse=a
+endif
+
 "------------------------------------------------------------------------------
 " ENABLE PLUGINS
 "------------------------------------------------------------------------------
