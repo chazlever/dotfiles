@@ -20,7 +20,6 @@ task :install do
   # Initialize and update git submodules
   system('git submodule init')
   system('git submodule update')
-  update()
   
   # Link files to user home directory
   replace_all = link_dir('.', false)
@@ -30,10 +29,6 @@ end
 desc "Update dot files from git repository."
 task :update do
    system('git pull origin master')
-   update()
-end
-
-def update()
    system('git submodule foreach git pull origin master')
 end
 
