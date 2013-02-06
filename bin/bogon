@@ -1,0 +1,32 @@
+#!/bin/bash
+
+_USAGE="usage: $(basename $0) [-h] {IP}"
+
+_DOMAIN=0
+while getopts ':h' opt; do
+  case $opt in
+    h)
+      echo "${_USAGE}"
+      exit
+      ;;
+    \?)
+      echo "$(basename $0): illegal option -- $OPTARG"
+      echo "${_USAGE}"
+      exit 1
+      ;;
+  esac
+done
+
+shift $((OPTIND-1))
+
+if [ -z "$1" ]; then
+  echo "${_USAGE}"
+  exit 1
+fi
+
+_ZONE='v4.fullbogons.cymru.com.'
+IFS='.' read -ra ADDR <<< "$1"
+for i in "${ADDR[@]}"; do
+  _ZONE="$i.${_ZONE}"
+done
+dig @8.8.8.8 +short ${_ZONE} TXT
