@@ -17,10 +17,6 @@ task :install do
     end
   end
 
-  # Initialize and update git submodules
-  system('git submodule init')
-  system('git submodule update')
-  
   # Link files to user home directory
   replace_all = link_dir('.', false)
   link_dir('erb', replace_all)
