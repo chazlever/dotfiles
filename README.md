@@ -6,9 +6,15 @@ Collection of config files for a Linux/UNIX style system.
 Installation
 ------------
 
-    git clone git://github.com/chazlever/dotfiles ~/.dotfiles
+    git clone --recursive git://github.com/chazlever/dotfiles ~/.dotfiles
     cd ~/.dotfiles
     rake install
+
+Updating
+------------
+
+    cd ~/.dotfiles
+    rake update
 
 Thanks
 ------
