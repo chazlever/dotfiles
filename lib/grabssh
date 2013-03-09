@@ -13,7 +13,7 @@ do
   sed 's/=/="/
        s/$/"/
        s/^/export /'
-done 1>"${FIXSSH}"
+done 1>!"${FIXSSH}"
 
 alias fixssh="source ${FIXSSH}"
 unset TMPDIR FIXSSH SSHVARS

@@ -19,8 +19,7 @@ alias fgrep='fgrep --color' # enable colorized results
 
 alias pdb='python -m pdb'   # add quick alias for python debugger
 
-alias ta='tmux attach-session -t'   # attach to tmux session
+alias ta='tmux -u attach-session -t'   # attach to tmux session
 alias tl='tmux list-sessions'       # list active tmux sessions
-alias tn='tmux new-session -s'      # create new tmux session
+alias tn='tmux -u new-session -s'      # create new tmux session
 alias ts='tmux switch -t'           # switch between active sessions
-
