@@ -26,3 +26,6 @@
 	path = vim/bundle/vim-pathogen
 	url = git://github.com/tpope/vim-pathogen.git
    ignore = untracked
+[submodule "zprezto"]
+	path = zprezto
+	url = https://github.com/sorin-ionescu/prezto.git
