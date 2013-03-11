@@ -4,9 +4,19 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 # Configure the title for xterm sessions
+DISABLE_AUTO_TITLE="true"
 case $TERM in
+  screen*)
+    precmd () {
+       # TAB TITLE
+       echo -ne "\ePtmux;\e\e]1;${PWD/#$HOME/~}\a\e\\"
+       # WINDOW TITLE
+       echo -ne "\ePtmux;\e\e]2;${USER}@$(hostname -s) : ${PWD/#$HOME/~}\a\e\\"
+       # TMUX TITLE
+       printf '\ek%s\e\\' "${PWD/#$HOME/~}"
+    }
+  ;;
   xterm*)
-    DISABLE_AUTO_TITLE="true"
     precmd () {
        # TAB TITLE
        echo -ne "\e]1;${PWD/#$HOME/~}\a"
