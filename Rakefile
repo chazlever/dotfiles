@@ -3,6 +3,9 @@ require 'erb'
 
 desc "Install dot files into user's home directory."
 task :install do
+  # Make sure all git submodules are initialized and updated
+  system('git submodule update --init --recursive')
+
   # Get mappings for ERB files and store in hash
   $cfg_mappings = {}
   mf = 'erb/config.mappings'
@@ -25,7 +28,7 @@ end
 desc "Update dot files from git repository."
 task :update do
    system('git pull origin master')
-   system('git submodule foreach git pull origin master')
+   system('git submodule foreach --recursive git pull origin master')
 end
 
 def link_dir(dir, replace_all = false)
