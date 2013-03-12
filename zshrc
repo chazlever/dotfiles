@@ -9,9 +9,9 @@ case $TERM in
   screen*)
     precmd () {
        # TAB TITLE
-       echo -ne "\ePtmux;\e\e]1;${PWD/#$HOME/~}\a\e\\"
+       printf '\ePtmux;\e\e]1;%s\a\e\\' "${PWD/#$HOME/~}"
        # WINDOW TITLE
-       echo -ne "\ePtmux;\e\e]2;${USER}@$(hostname -s) : ${PWD/#$HOME/~}\a\e\\"
+       printf '\ePtmux;\e\e]2;%s\a\e\\' "${USER}@$(hostname -s)"
        # TMUX TITLE
        printf '\ek%s\e\\' "${PWD/#$HOME/~}"
     }
@@ -19,9 +19,9 @@ case $TERM in
   xterm*)
     precmd () {
        # TAB TITLE
-       echo -ne "\e]1;${PWD/#$HOME/~}\a"
+       printf '\e]1;%s\a' "${PWD/#$HOME/~}"
        # WINDOW TITLE
-       echo -ne "\e]2;${USER}@$(hostname -s) : ${PWD/#$HOME/~}\a"
+       printf '\e]2;%s\a' "${USER}@$(hostname -s)"
     }
   ;;
 esac
