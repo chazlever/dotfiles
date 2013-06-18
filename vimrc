@@ -64,6 +64,12 @@ call pathogen#helptags()
 filetype plugin indent on         " Turn on file type detection.
 syntax enable                     " Turn on syntax highlighting.
 
+" Currently, only want to use Syntastic with Python
+let g:syntastic_mode_map = { 'mode': 'passive',
+   \ 'active_filetypes': ['python'],
+   \ 'passive_filetypes': [] }
+let g:syntastic_python_checkers = ['pyflakes']
+
 "------------------------------------------------------------------------------
 " CONFIGURE COLOR SCHEME
 "------------------------------------------------------------------------------
