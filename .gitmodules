@@ -20,7 +20,7 @@
    ignore = untracked
 [submodule "vim/bundle/vim-syntastic"]
 	path = vim/bundle/vim-syntastic
-	url = git://github.com/chazlever/syntastic.git
+	url = git://github.com/scrooloose/syntastic.git
    ignore = untracked
 [submodule "vim/bundle/vim-pathogen"]
 	path = vim/bundle/vim-pathogen
