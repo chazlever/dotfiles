@@ -3,5 +3,6 @@
 if [ ! -z $(which curl) ]; then
    curl --silent icanhazip.com
 else
-  echo "curl: could not be found"
+  echo "error: curl could not be found on in PATH"
+  exit 1
 fi
