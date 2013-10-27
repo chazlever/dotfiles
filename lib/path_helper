@@ -13,16 +13,7 @@ path_helper() {
       # Check if line is empty
       [ -z $line ] && continue
 
-      # Perform duplicate check
-      CUR_PATH="$(eval echo $line)"
-      case ":${PATH}:" in
-         *":${CUR_PATH}:"*) 
-             continue;; # it's a duplicate
-         *) 
-             PATH="${CUR_PATH}:${PATH}";;
-      esac
-
-      # If not duplicate, add to temporary variable
+      # Add current path to temporary variable
       if [ -z "${TEMP}" ]; then
         TEMP="$(eval echo $line)"
       else
