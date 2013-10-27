@@ -4,9 +4,25 @@ path_helper() {
   FILE="$1"
   VAR="$2"
   if [ -f "${FILE}" ]; then
+    # Get a copy of VAR for various checks
+    VARPATH=$(eval 'echo ${'"${VAR}"'}')
+
+    # Get paths from file
     while read line
     do
+      # Check if line is empty
       [ -z $line ] && continue
+
+      # Perform duplicate check
+      CUR_PATH="$(eval echo $line)"
+      case ":${PATH}:" in
+         *":${CUR_PATH}:"*) 
+             continue;; # it's a duplicate
+         *) 
+             PATH="${CUR_PATH}:${PATH}";;
+      esac
+
+      # If not duplicate, add to temporary variable
       if [ -z "${TEMP}" ]; then
         TEMP="$(eval echo $line)"
       else
@@ -15,8 +31,8 @@ path_helper() {
     done < "${FILE}"
   fi
 
+  # Verify if paths were found and add to VAR
   if [ ! -z "${TEMP}" ]; then
-    VARPATH=$(eval 'echo ${'"${VAR}"'}')
     if [ ! -z "${VARPATH}" ]; then
       export "${VAR}"="${TEMP}:${VARPATH}"
     else
