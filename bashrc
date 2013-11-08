@@ -94,5 +94,10 @@ if [ -s "${HOME}/.rvm/scripts/rvm" ]; then
   . "${HOME}/.rvm/scripts/rvm"
 fi
 
+# Add new items to path from ~/.lib/paths
+if [ -f ~/.lib/path_deduper ]; then
+  . ~/.lib/path_deduper
+fi
+
 # Set RWX permissions only for user and group
 umask 007
