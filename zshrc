@@ -26,6 +26,9 @@ case $TERM in
   ;;
 esac
 
+# Setup ZSH key bindings
+bindkey \^U backward-kill-line
+
 # Add new items to path from ~/.lib/paths
 if [ -f ~/.lib/path_helper ]; then
   . ~/.lib/path_helper
