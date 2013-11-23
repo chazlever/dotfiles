@@ -3,6 +3,9 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
    source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
+# Bind custom key combinations
+bindkey \^U backward-kill-line
+
 # Configure the title for xterm sessions
 DISABLE_AUTO_TITLE="true"
 case $TERM in
