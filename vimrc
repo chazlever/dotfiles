@@ -1,3 +1,4 @@
+
 "------------------------------------------------------------------------------
 " File: $HOME/.vimrc
 " Author: Chaz Lever <https://github.com/chazlever>
@@ -37,6 +38,7 @@ set laststatus=2                  " Show the status line all the time
 " Define the characters to use for hidden characters
 set nolist listchars=tab:>-,trail:.,nbsp:%,eol:$
 
+" Enable mouse support if support available
 if has('mouse')
    set mouse=a
 endif
@@ -45,30 +47,18 @@ endif
 " ENABLE PLUGINS
 "------------------------------------------------------------------------------
 
-runtime bundle/vim-pathogen/autoload/pathogen.vim
-
 " To disable a plugin, add it's bundle name to the following list
 let g:pathogen_disabled = []
 
 if empty(system('which ctags'))
   call add(g:pathogen_disabled, 'vim-taglist')
+  let g:disabled_ctags = 1
 endif
 
-if !has('gui_macvim')
-  call add(g:pathogen_disabled, 'vim-peepopen')
-endif
-
+runtime bundle/vim-pathogen/autoload/pathogen.vim
 call pathogen#infect()
-call pathogen#helptags()
-
 filetype plugin indent on         " Turn on file type detection.
 syntax enable                     " Turn on syntax highlighting.
-
-" Currently, only want to use Syntastic with Python
-let g:syntastic_mode_map = { 'mode': 'passive',
-   \ 'active_filetypes': ['python'],
-   \ 'passive_filetypes': [] }
-let g:syntastic_python_checkers = ['pyflakes']
 
 "------------------------------------------------------------------------------
 " CONFIGURE COLOR SCHEME
@@ -81,6 +71,11 @@ set background=dark
 " CONFIGURE PLUGIN OPTIONS
 "------------------------------------------------------------------------------
 
+" Currently, only want to use Syntastic with Python
+let g:syntastic_mode_map = { 'mode': 'passive',
+   \ 'active_filetypes': ['python'],
+   \ 'passive_filetypes': [] }
+let g:syntastic_python_checkers = ['pyflakes']
 let g:syntastic_check_on_open=1
 
 "------------------------------------------------------------------------------
@@ -105,21 +100,25 @@ map <C-n><C-h> <Esc>:help NERD_tree.txt<CR>
 " Toggle search highlighting
 map <Leader>h <Esc>:set hls!<CR>:echo "toggle search highlighting"<CR>
 
-" Toggle paste option
-if !has('gui_running')
-  function TogglePaste()
-    if &paste
-      set nopaste
-    else
-      set paste
-    endif
-    set paste ?
-  endfunction
-  map <Leader>p <Esc>:call TogglePaste()<CR>
-endif
-
 " Add mappings to remove trailing whitespace
 map <Leader>s <Esc>:% s/\s\+$//g<CR>:noh<CR>:echo "removed trailing whitespace"<CR>
+
+" Toggle taglist plugin
+if !pathogen#is_disabled('vim-taglist')
+   map <silent> <Leader>c <Esc>:TlistToggle<CR>
+   let Tlist_WinWidth=50
+endif
+
+" Toggle paste option
+function TogglePaste()
+  if &paste
+    set nopaste
+  else
+    set paste
+  endif
+  set paste ?
+endfunction
+map <Leader>p <Esc>:call TogglePaste()<CR>
 
 " Toggle hidden characters
 function ToggleHiddenChars()
@@ -140,12 +139,6 @@ function ToggleLineNumber()
   endif
 endfunction
 map <silent> <Leader>n <Esc>:call ToggleLineNumber()<CR>
-
-" Toggle ctags plugin
-if !empty(system('which ctags'))
-   map <silent> <Leader>c <Esc>:TlistToggle<CR>
-   let Tlist_WinWidth=50
-endif
 
 " Toggle word wrap
 function ToggleWordWrap()

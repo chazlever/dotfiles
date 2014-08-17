@@ -10,10 +10,6 @@
 	path = vim/bundle/vim-nerdtree
 	url = git://github.com/scrooloose/nerdtree.git
    ignore = untracked
-[submodule "vim/bundle/vim-peepopen"]
-	path = vim/bundle/vim-peepopen
-	url = git://github.com/topfunky/PeepOpen-EditorSupport.git
-   ignore = untracked
 [submodule "vim/bundle/vim-taglist"]
 	path = vim/bundle/vim-taglist
 	url = git://github.com/vim-scripts/taglist.vim.git
