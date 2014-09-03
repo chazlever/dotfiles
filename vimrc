@@ -66,8 +66,6 @@ syntax enable                     " Turn on syntax highlighting.
 
 colorscheme topfunky-light
 set background=dark
-let &colorcolumn=join(range(81,999),",")
-highlight ColorColumn ctermbg=235 guibg=#2c2d27
 
 "------------------------------------------------------------------------------
 " CONFIGURE PLUGIN OPTIONS
