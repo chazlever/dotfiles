@@ -4,6 +4,8 @@ if [ "$(echo $(uname) | tr A-Z a-z)" = "darwin" ]; then
   COLOR='-G'
 fi
 
+alias timestamp="date +%Y%m%d-%H%M-%s"
+
 alias ls="ls -h ${COLOR}"  # enable colorized listings
 alias ls.='ls -d .*'       # list hidden files
 alias lsa='ls -la'         # list all files 
