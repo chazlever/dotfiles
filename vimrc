@@ -103,6 +103,11 @@ map <Leader>h <Esc>:set hls!<CR>:echo "toggle search highlighting"<CR>
 " Add mappings to remove trailing whitespace
 map <Leader>s <Esc>:% s/\s\+$//g<CR>:noh<CR>:echo "removed trailing whitespace"<CR>
 
+" Slimux Mappings
+nnoremap <Leader>sl :SlimuxREPLSendLine<CR>
+vnoremap <Leader>ss :SlimuxREPLSendSelection<CR>
+nnoremap <leader>sb :SlimuxREPLSendBuffer<CR>
+
 " Toggle taglist plugin
 if !pathogen#is_disabled('vim-taglist')
    map <silent> <Leader>c <Esc>:TlistToggle<CR>
@@ -149,3 +154,4 @@ function ToggleWordWrap()
   endif
 endfunction
 map <silent> <Leader>w <Esc>:call ToggleWordWrap()<CR>
+

@@ -25,3 +25,9 @@
 [submodule "zprezto"]
 	path = zprezto
 	url = https://github.com/sorin-ionescu/prezto.git
+[submodule "vim/bundle/vim-slimux"]
+	path = vim/bundle/vim-slimux
+	url = https://github.com/epeli/slimux.git
+[submodule "vim/bundle/vim-scala"]
+	path = vim/bundle/vim-scala
+	url = https://github.com/derekwyatt/vim-scala.git
