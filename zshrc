@@ -5,6 +5,7 @@ fi
 
 # Bind custom key combinations
 bindkey \^U backward-kill-line
+zstyle ':completion:*' hosts off
 
 # Configure the title for xterm sessions
 DISABLE_AUTO_TITLE="true"
