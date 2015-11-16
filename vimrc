@@ -155,3 +155,9 @@ function ToggleWordWrap()
 endfunction
 map <silent> <Leader>w <Esc>:call ToggleWordWrap()<CR>
 
+" Quicker window movement
+" url: https://github.com/thoughtbot/dotfiles/blob/master/vimrc
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
