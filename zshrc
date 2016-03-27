@@ -1,6 +1,16 @@
-# Source Prezto
-if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
-   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+# Source oh-my-zsh
+if [[ -s "${HOME}/.oh-my-zsh" ]]; then
+   export ZSH="$HOME/.oh-my-zsh"
+   export ZSH_CUSTOM="$HOME/.zsh"
+   export ZSH_THEME="sorin"
+
+   plugins=(
+      git svn docker brew sbt scala golang python pip
+      zsh-completions zsh-autosuggestions zsh-syntax-highlighting
+   )
+   autoload -U compinit && compinit
+
+   source $ZSH/oh-my-zsh.sh
 fi
 
 # Bind custom key combinations
@@ -56,11 +66,6 @@ fi
 # Add any local customizations
 if [ -f ~/.localrc ]; then
   . ~/.localrc
-fi
-
-# Load RVM if it is installed
-if [ -s "${HOME}/.rvm/scripts/rvm" ]; then
-  . "${HOME}/.rvm/scripts/rvm"
 fi
 
 # Add new items to path from ~/.lib/paths
