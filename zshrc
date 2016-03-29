@@ -5,7 +5,6 @@ fi
 
 # Update the dircolors database on Linux
 if [[ "$(uname)" == "Linux" ]]; then
-   echo "This is linux: $(uname)"
    eval $(dircolors "$HOME/.dircolors-solarized/dircolors.ansi-dark")
 fi
 
