@@ -64,7 +64,7 @@ syntax enable                     " Turn on syntax highlighting.
 " CONFIGURE COLOR SCHEME
 "------------------------------------------------------------------------------
 
-colorscheme topfunky-light
+colorscheme solarized
 set background=dark
 
 "------------------------------------------------------------------------------
