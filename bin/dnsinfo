@@ -1,0 +1,3 @@
+#! /bin/bash
+
+dig -t txt +short edns-client-sub.net | sed 's/"//g' | sed "s/'/\"/g" | jq
