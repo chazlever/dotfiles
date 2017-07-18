@@ -63,6 +63,7 @@ endif
 
 runtime bundle/vim-pathogen/autoload/pathogen.vim
 call pathogen#infect()
+Helptags
 filetype plugin indent on         " Turn on file type detection.
 syntax enable                     " Turn on syntax highlighting.
 
