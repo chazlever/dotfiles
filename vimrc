@@ -78,12 +78,21 @@ set background=dark
 " CONFIGURE PLUGIN OPTIONS
 "------------------------------------------------------------------------------
 
-" Currently, only want to use Syntastic with Python
-let g:syntastic_mode_map = { 'mode': 'passive',
-   \ 'active_filetypes': ['python'],
-   \ 'passive_filetypes': [] }
-let g:syntastic_python_checkers = ['pyflakes']
-let g:syntastic_check_on_open=1
+" Configure ALE
+let g:ale_linters = {'tex': []}
+
+" Configure vimtex plugin for use with Skim
+let g:vimtex_view_general_viewer = '/Applications/Skim.app/Contents/SharedSupport/displayline'
+let g:vimtex_view_general_options = '-r @line @pdf @tex'
+let g:vimtex_view_general_options_latexmk = '-r 1'
+let g:vimtex_quickfix_method = 'pplatex'
+
+" Configure NeoComplete
+let g:neocomplete#enable_at_startup = 1
+if !exists('g:neocomplete#sources#omni#input_patterns')
+  let g:neocomplete#sources#omni#input_patterns = {}
+endif
+let g:neocomplete#sources#omni#input_patterns.tex = g:vimtex#re#neocomplete
 
 "------------------------------------------------------------------------------
 " SET KEY MAPPINGS
@@ -168,3 +177,4 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
+
