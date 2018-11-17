@@ -71,7 +71,8 @@ syntax enable                     " Turn on syntax highlighting.
 " CONFIGURE COLOR SCHEME
 "------------------------------------------------------------------------------
 
-colorscheme solarized
+colorscheme gruvbox
+let g:gruvbox_contrast_dark = 'hard'
 set background=dark
 
 "------------------------------------------------------------------------------

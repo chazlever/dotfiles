@@ -3,11 +3,6 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
    source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
-# Update the dircolors database on Linux
-if [[ "$(uname)" == "Linux" ]]; then
-   eval $(dircolors "$HOME/.dircolors-solarized/dircolors.ansi-dark")
-fi
-
 # Bind custom key combinations
 bindkey \^U backward-kill-line
 zstyle ':completion:*' hosts off
