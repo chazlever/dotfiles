@@ -83,7 +83,7 @@ set background=dark
 let g:ale_linters = {'tex': []}
 
 " Configure vimtex plugin for use with Skim
-let g:vimtex_view_general_viewer = '/Applications/Skim.app/Contents/SharedSupport/displayline'
+let g:vimtex_view_method ='skim'
 let g:vimtex_view_general_options = '@line @pdf @tex'
 let g:vimtex_view_general_options_latexmk = '@line'
 let g:vimtex_quickfix_method = 'pplatex'
