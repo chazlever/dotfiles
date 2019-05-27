@@ -23,21 +23,3 @@ set guicursor+=a:blinkon0
 
 colorscheme gruvbox
 
-"------------------------------------------------------------------------------
-" MACVIM SPECIFIC
-"------------------------------------------------------------------------------
-
-if has('gui_macvim')
-   set guifont=Inconsolata:h20       " Font family and font size.
-
-   " Toggle fullscreen for MacVim
-   set fuoptions=maxvert
-   function ToggleFullscreen()
-      if &fullscreen
-         set nofullscreen columns=100 lines=80
-      else
-         set fullscreen
-      endif
-   endfunction
-   map <silent> <Leader>f <Esc>:call ToggleFullscreen()<CR>
-endif
