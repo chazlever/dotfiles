@@ -14,12 +14,14 @@ set background=dark               " Background.
 set columns=100                   " Window dimensions.
 set showtabline=2                 " Always show the tab bar
 set guioptions-=r                 " Don't show right scrollbar
+set guifont=Menlo:h14
+set guicursor+=a:blinkon0
 
 "------------------------------------------------------------------------------
 " CONFIGURE COLOR SCHEME
 "------------------------------------------------------------------------------
 
-colorscheme vibrantink
+colorscheme gruvbox
 
 "------------------------------------------------------------------------------
 " MACVIM SPECIFIC
