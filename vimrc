@@ -1,4 +1,3 @@
-
 "------------------------------------------------------------------------------
 " File: $HOME/.vimrc
 " Author: Chaz Lever <https://github.com/chazlever>
@@ -34,6 +33,8 @@ set expandtab                     " Use spaces instead of tabs
 set smarttab                      " Insert tabs according to tabstop, shiftwidth, and expandtab
 set autoindent                    " Copy indentation from previous line
 set laststatus=2                  " Show the status line all the time
+filetype plugin indent on         " Turn on file type detection.
+syntax enable                     " Turn on syntax highlighting.
 
 " Define the characters to use for hidden characters
 set nolist listchars=tab:>-,trail:.,nbsp:%,eol:$
@@ -48,24 +49,6 @@ endif
 "------------------------------------------------------------------------------
 
 au! BufRead,BufNewFile *.tex setfiletype tex
-
-"------------------------------------------------------------------------------
-" ENABLE PLUGINS
-"------------------------------------------------------------------------------
-
-" To disable a plugin, add it's bundle name to the following list
-let g:pathogen_disabled = []
-
-if empty(system('which ctags'))
-  call add(g:pathogen_disabled, 'vim-taglist')
-  let g:disabled_ctags = 1
-endif
-
-runtime bundle/vim-pathogen/autoload/pathogen.vim
-call pathogen#infect()
-Helptags
-filetype plugin indent on         " Turn on file type detection.
-syntax enable                     " Turn on syntax highlighting.
 
 "------------------------------------------------------------------------------
 " CONFIGURE COLOR SCHEME
@@ -88,13 +71,6 @@ let g:vimtex_view_general_options = '@line @pdf @tex'
 let g:vimtex_view_general_options_latexmk = '@line'
 let g:vimtex_quickfix_method = 'pplatex'
 
-" Configure NeoComplete
-let g:neocomplete#enable_at_startup = 1
-if !exists('g:neocomplete#sources#omni#input_patterns')
-  let g:neocomplete#sources#omni#input_patterns = {}
-endif
-let g:neocomplete#sources#omni#input_patterns.tex = g:vimtex#re#neocomplete
-
 "------------------------------------------------------------------------------
 " SET KEY MAPPINGS
 "------------------------------------------------------------------------------
@@ -112,7 +88,6 @@ map <leader>tm :tabmove
 
 " NERDTree Mappings
 map <C-n><C-n> <Esc>:NERDTreeToggle<CR>
-map <C-n><C-h> <Esc>:help NERD_tree.txt<CR>
 
 " Toggle search highlighting
 map <Leader>h <Esc>:set hls!<CR>:echo "toggle search highlighting"<CR>
@@ -126,10 +101,8 @@ vnoremap <Leader>ss :SlimuxREPLSendSelection<CR>
 nnoremap <leader>sb :SlimuxREPLSendBuffer<CR>
 
 " Toggle taglist plugin
-if !pathogen#is_disabled('vim-taglist')
-   map <silent> <Leader>c <Esc>:TlistToggle<CR>
-   let Tlist_WinWidth=50
-endif
+map <silent> <Leader>c <Esc>:TlistToggle<CR>
+let Tlist_WinWidth=50
 
 " Toggle paste option
 function TogglePaste()
@@ -178,4 +151,3 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
-

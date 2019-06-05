@@ -1,56 +1,56 @@
 [submodule "vim/bundle/vim-git"]
-	path = vim/bundle/vim-git
+	path = vim/pack/bundle/start/vim-git
    url = git://github.com/tpope/vim-git.git
    ignore = untracked
 [submodule "vim/bundle/vim-markdown"]
-	path = vim/bundle/vim-markdown
+	path = vim/pack/bundle/start/vim-markdown
 	url = git://github.com/tpope/vim-markdown.git
    ignore = untracked
 [submodule "vim/bundle/vim-nerdtree"]
-	path = vim/bundle/vim-nerdtree
+	path = vim/pack/bundle/start/vim-nerdtree
 	url = git://github.com/scrooloose/nerdtree.git
    ignore = untracked
 [submodule "vim/bundle/vim-taglist"]
-	path = vim/bundle/vim-taglist
+	path = vim/pack/bundle/start/vim-taglist
 	url = git://github.com/vim-scripts/taglist.vim.git
    ignore = untracked
 [submodule "vim/bundle/vim-pathogen"]
-	path = vim/bundle/vim-pathogen
+	path = vim/pack/bundle/start/vim-pathogen
 	url = git://github.com/tpope/vim-pathogen.git
    ignore = untracked
 [submodule "zprezto"]
 	path = zprezto
 	url = https://github.com/sorin-ionescu/prezto.git
 [submodule "vim/bundle/vim-slimux"]
-	path = vim/bundle/vim-slimux
+	path = vim/pack/bundle/start/vim-slimux
 	url = https://github.com/epeli/slimux.git
 [submodule "vim/bundle/vim-scala"]
-	path = vim/bundle/vim-scala
+	path = vim/pack/bundle/start/vim-scala
 	url = https://github.com/derekwyatt/vim-scala.git
 [submodule "vim/bundle/vim-fugitive"]
-	path = vim/bundle/vim-fugitive
+	path = vim/pack/bundle/start/vim-fugitive
 	url = https://github.com/tpope/vim-fugitive.git
 [submodule "vim/bundle/vim-tmux-navigator"]
-	path = vim/bundle/vim-tmux-navigator
+	path = vim/pack/bundle/start/vim-tmux-navigator
 	url = https://github.com/christoomey/vim-tmux-navigator.git
 [submodule "vim/bundle/vim-surround"]
-	path = vim/bundle/vim-surround
+	path = vim/pack/bundle/start/vim-surround
 	url = https://github.com/tpope/vim-surround.git
 [submodule "vim/bundle/vim-colors-solarized"]
-	path = vim/bundle/vim-colors-solarized
+	path = vim/pack/bundle/start/vim-colors-solarized
 	url = https://github.com/altercation/vim-colors-solarized.git
 [submodule "vim/bundle/ale"]
-	path = vim/bundle/ale
+	path = vim/pack/bundle/start/ale
 	url = https://github.com/w0rp/ale.git
 [submodule "vim/bundle/vim-go"]
-	path = vim/bundle/vim-go
+	path = vim/pack/bundle/start/vim-go
 	url = https://github.com/fatih/vim-go.git
 [submodule "vim/bundle/vimtex"]
-	path = vim/bundle/vimtex
+	path = vim/pack/bundle/start/vimtex
 	url = https://github.com/lervag/vimtex.git
 [submodule "vim/bundle/gruvbox"]
-	path = vim/bundle/gruvbox
+	path = vim/pack/bundle/start/gruvbox
 	url = https://github.com/morhetz/gruvbox.git
 [submodule "vim/bundle/deoplete.nvim"]
-	path = vim/bundle/deoplete.nvim
+	path = vim/pack/bundle/start/deoplete.nvim
 	url = https://github.com/Shougo/deoplete.nvim.git
