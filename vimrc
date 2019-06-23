@@ -72,6 +72,7 @@ let g:vimtex_view_general_options_latexmk = '@line'
 let g:vimtex_quickfix_open_on_warning = 0
 
 let g:vimtex_quickfix_method = 'pplatex'
+let g:tex_flavor = 'latex'
 
 "------------------------------------------------------------------------------
 " SET KEY MAPPINGS
