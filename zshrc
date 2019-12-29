@@ -1,11 +1,18 @@
+#
+# Executes commands at the start of an interactive session.
+#
+# Authors:
+#   Sorin Ionescu <sorin.ionescu@gmail.com>
+#
+
 # Source Prezto
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
    source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
 # Bind custom key combinations
-bindkey \^U backward-kill-line
-zstyle ':completion:*' hosts off
+#bindkey \^U backward-kill-line
+#zstyle ':completion:*' hosts off
 
 # Configure the title for xterm sessions
 DISABLE_AUTO_TITLE="true"
