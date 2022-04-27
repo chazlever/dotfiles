@@ -53,9 +53,10 @@ au! BufRead,BufNewFile *.tex setfiletype tex
 "------------------------------------------------------------------------------
 " CONFIGURE COLOR SCHEME
 "------------------------------------------------------------------------------
-
-colorscheme gruvbox
-let g:gruvbox_contrast_dark = 'hard'
+packadd! dracula
+colorscheme dracula
+let g:dracula_colorterm = 0
+let g:dracula_italic = 0
 set background=dark
 
 "------------------------------------------------------------------------------
