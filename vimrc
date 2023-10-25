@@ -51,9 +51,39 @@ endif
 au! BufRead,BufNewFile *.tex setfiletype tex
 
 "------------------------------------------------------------------------------
+" PLUGIN INSTALLATION
+"------------------------------------------------------------------------------
+
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+call plug#begin()
+Plug 'sk1418/QFGrep'
+Plug 'dense-analysis/ale'
+Plug 'Shougo/deoplete.nvim'
+Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-fugitive'
+Plug 'preservim/vim-markdown'
+Plug 'mzlogin/vim-markdown-toc'
+Plug 'preservim/nerdtree'
+Plug 'sheerun/vim-polyglot'
+Plug 'derekwyatt/vim-scala'
+Plug 'tpope/vim-sensible'
+Plug 'esamattis/slimux'
+Plug 'tpope/vim-surround'
+Plug 'yegappan/taglist'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'tpope/vim-unimpaired'
+Plug 'lervag/vimtex'
+Plug 'dracula/vim', { 'as': 'dracula' }
+call plug#end()
+
+"------------------------------------------------------------------------------
 " CONFIGURE COLOR SCHEME
 "------------------------------------------------------------------------------
-packadd! dracula
 colorscheme dracula
 let g:dracula_colorterm = 0
 let g:dracula_italic = 0
