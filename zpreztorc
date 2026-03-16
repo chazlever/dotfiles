@@ -35,10 +35,10 @@ zstyle ':prezto:load' pmodule \
   'directory' \
   'spectrum' \
   'utility' \
-  'completion' \
   'autosuggestions' \
   'syntax-highlighting' \
   'history-substring-search' \
+  'completion' \
   'prompt'
 
 #

@@ -2,52 +2,25 @@
 # Executes commands at the start of an interactive session.
 #
 # Authors:
-#   Sorin Ionescu <sorin.ionescu@gmail.com>
+#   Chaz Lever <chaz@noreply.users.github.com>
 #
-
-# Source Prezto
-if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
-   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
-fi
-
-# Bind custom key combinations
-#bindkey \^U backward-kill-line
-#zstyle ':completion:*' hosts off
-
-# Configure the title for xterm sessions
-DISABLE_AUTO_TITLE="true"
-case $TERM in
-  screen*)
-    precmd () {
-       # TAB TITLE
-       printf '\ePtmux;\e\e]1;%s\a\e\\' "${PWD/#$HOME/~}"
-       # WINDOW TITLE
-       printf '\ePtmux;\e\e]2;%s\a\e\\' "${USER}@$(hostname -s)"
-       # TMUX TITLE
-       printf '\ek%s\e\\' "${PWD/#$HOME/~}"
-    }
-  ;;
-  xterm*)
-    precmd () {
-       # TAB TITLE
-       printf '\e]1;%s\a' "${PWD/#$HOME/~}"
-       # WINDOW TITLE
-       printf '\e]2;%s\a' "${USER}@$(hostname -s)"
-    }
-  ;;
-esac
 
 # Setup ZSH key bindings
 bindkey \^U backward-kill-line
 
-# Add new items to path from ~/.lib/paths
+# Add any local customizations
+if [ -f ~/.localrc ]; then
+  . ~/.localrc
+fi
+
+# Add new items to PATH from ~/.lib/paths
 if [ -f ~/.lib/path_helper ]; then
   . ~/.lib/path_helper
 fi
 
-# Add new SSH proxy functions
-if [ -f ~/.lib/proxy ]; then
-  . ~/.lib/proxy
+# Remove duplicate paths from PATH
+if [ -f ~/.lib/path_deduper ]; then
+  . ~/.lib/path_deduper
 fi
 
 # Add any new aliases to this file
@@ -60,17 +33,29 @@ if [ -f ~/.lib/grabssh ]; then
   . ~/.lib/grabssh
 fi
 
-# Add any local customizations
-if [ -f ~/.localrc ]; then
-  . ~/.localrc
+# Source Prezto
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
-# Load RVM if it is installed
-if [ -s "${HOME}/.rvm/scripts/rvm" ]; then
-  . "${HOME}/.rvm/scripts/rvm"
+# Setup Homebrew completions if they exist
+homebrew_completions="$(brew --prefix)/share/zsh/site-functions"
+if [[ -d "$homebrew_completions" ]]; then
+  fpath=(
+    "$homebrew_completions"
+    "${fpath[@]}"
+  )
+  autoload -Uz compinit
+  compinit -u
 fi
 
-# Add new items to path from ~/.lib/paths
-if [ -f ~/.lib/path_deduper ]; then
-  . ~/.lib/path_deduper
+# Created by `pipx` on 2024-04-04 22:14:37
+export PATH="$PATH:/Users/chaz/.local/bin"
+if [ -f "/Users/chaz/.config/fabric/fabric-bootstrap.inc" ]; then 
+  . "/Users/chaz/.config/fabric/fabric-bootstrap.inc"; 
 fi
+# The following lines have been added by Docker Desktop to enable Docker CLI completions.
+fpath=(/Users/chaz/.docker/completions $fpath)
+autoload -Uz compinit
+compinit
+# End of Docker CLI completions

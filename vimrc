@@ -33,6 +33,7 @@ set expandtab                     " Use spaces instead of tabs
 set smarttab                      " Insert tabs according to tabstop, shiftwidth, and expandtab
 set autoindent                    " Copy indentation from previous line
 set laststatus=2                  " Show the status line all the time
+set foldlevel=99                  " Should open all folds by default
 filetype plugin indent on         " Turn on file type detection.
 syntax enable                     " Turn on syntax highlighting.
 
@@ -84,10 +85,10 @@ call plug#end()
 "------------------------------------------------------------------------------
 " CONFIGURE COLOR SCHEME
 "------------------------------------------------------------------------------
-colorscheme dracula
 let g:dracula_colorterm = 0
 let g:dracula_italic = 0
 set background=dark
+colorscheme dracula
 
 "------------------------------------------------------------------------------
 " CONFIGURE PLUGIN OPTIONS
@@ -99,11 +100,13 @@ let g:ale_linters = {'tex': []}
 " Configure vimtex plugin for use with Skim
 let g:vimtex_view_method ='skim'
 let g:vimtex_view_general_options = '@line @pdf @tex'
-let g:vimtex_view_general_options_latexmk = '@line'
 let g:vimtex_quickfix_open_on_warning = 0
 
 let g:vimtex_quickfix_method = 'pplatex'
 let g:tex_flavor = 'latex'
+
+" Configure vim-markdown to highlight YAML frontmatter for Hugo
+let g:vim_markdown_frontmatter = 1
 
 "------------------------------------------------------------------------------
 " SET KEY MAPPINGS
