@@ -4,6 +4,7 @@
 
 DOTFILES="$(cd "$(dirname "$0")/.." && pwd)"
 
+# shellcheck source-path=SCRIPTDIR/..
 # shellcheck source=script/functions
 . "$DOTFILES/script/functions"
 
