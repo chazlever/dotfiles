@@ -1,0 +1,61 @@
+#!/bin/sh
+#
+# dot
+#
+# Handles updating and maintaining dotfiles. Run periodically to keep
+# everything up-to-date.
+
+set -e
+
+DOTFILES="$HOME/.dotfiles"
+
+# shellcheck source=script/functions
+. "$DOTFILES/script/functions"
+
+display_help () {
+  cat <<-EOF
+
+  Usage: dot [options]
+
+  Options:
+    -e, --edit    Open dotfiles in \$EDITOR
+    -h, --help    Show this help message
+
+  Without options, updates dotfiles and runs installers.
+
+EOF
+}
+
+case "$1" in
+  -h|--help)
+    display_help
+    ;;
+  -e|--edit)
+    exec "${EDITOR:-vim}" "$DOTFILES"
+    ;;
+  *)
+    echo ''
+    echo '       _       _   '
+    echo '      | |     | |  '
+    echo '    __| | ___ | |_ '
+    echo '   / _` |/ _ \| __|'
+    echo '  | (_| | (_) | |_ '
+    echo '   \__,_|\___/ \__|'
+    echo ''
+
+    info 'updating dotfiles'
+    git -C "$DOTFILES" pull --quiet
+    success 'dotfiles updated'
+
+    info 'updating submodules'
+    git -C "$DOTFILES" submodule update --init --recursive --quiet
+    success 'submodules updated'
+
+    info 'running installers'
+    "$DOTFILES/script/install"
+    success 'installers complete'
+
+    echo ''
+    success 'all done!'
+    ;;
+esac
