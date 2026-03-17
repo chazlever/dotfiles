@@ -14,9 +14,9 @@ fi
 
 if [ "$(uname)" = "Darwin" ]; then
   info "installing starship via Homebrew"
-  brew install starship
+  brew install --quiet starship
 else
   info "installing starship to ~/.local/bin"
   mkdir -p ~/.local/bin
-  curl -sS https://starship.rs/install.sh | sh -s -- --bin-dir ~/.local/bin -y
+  curl -sS https://starship.rs/install.sh | sh -s -- --bin-dir ~/.local/bin -y > /dev/null 2>&1
 fi
