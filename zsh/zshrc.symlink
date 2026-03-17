@@ -1,0 +1,55 @@
+#
+# Executes commands at the start of an interactive session.
+#
+# Authors:
+#   Chaz Lever <chaz@noreply.users.github.com>
+#
+
+DOTFILES="$HOME/.dotfiles"
+
+# Setup ZSH key bindings
+bindkey \^U backward-kill-line
+
+# Add any local customizations
+if [ -f ~/.localrc ]; then
+  . ~/.localrc
+fi
+
+# Source all path.zsh files first
+for file in "$DOTFILES"/*/path.zsh(N); do
+  source "$file"
+done
+
+# Source all *.zsh files (except path.zsh and completion.zsh)
+for file in "$DOTFILES"/*/*.zsh(N); do
+  case "$file" in
+    */path.zsh|*/completion.zsh) continue ;;
+  esac
+  source "$file"
+done
+
+# Zsh plugins (loaded from git submodules)
+fpath=($DOTFILES/zsh/plugins/zsh-completions/src $fpath)
+autoload -Uz compinit
+compinit
+
+zstyle ':completion:*' menu select
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*:descriptions' format '%F{yellow}-- %d --%f'
+zstyle ':completion:*:warnings' format '%F{red}No matches for: %d%f'
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*'
+
+# Source all completion.zsh files last
+for file in "$DOTFILES"/*/completion.zsh(N); do
+  source "$file"
+done
+
+source $DOTFILES/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $DOTFILES/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+eval "$(starship init zsh)"
+
+# Work around starship/starship#560
+precmd() { precmd() { echo "" } }
+alias clear="precmd() { precmd() { echo } } && clear"

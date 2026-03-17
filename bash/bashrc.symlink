@@ -1,0 +1,77 @@
+# Author: Chaz Lever
+
+DOTFILES="$HOME/.dotfiles"
+
+# Add new items to path
+if [ -f "$DOTFILES/system/path.zsh" ]; then
+  . "$DOTFILES/system/path.zsh"
+fi
+if [ -f "$DOTFILES/bin/path.zsh" ]; then
+  . "$DOTFILES/bin/path.zsh"
+fi
+
+# If not running interactively, don't do anything
+[ -z "${PS1}" ] && return
+
+# Add new SSH proxy functions
+if [ -f "$DOTFILES/ssh/proxy.zsh" ]; then
+  . "$DOTFILES/ssh/proxy.zsh"
+fi
+
+# Add any new exports to this file
+if [ -f "$DOTFILES/system/exports.zsh" ]; then
+  . "$DOTFILES/system/exports.zsh"
+fi
+
+# Add any new aliases to this file
+if [ -f "$DOTFILES/system/aliases.zsh" ]; then
+  . "$DOTFILES/system/aliases.zsh"
+fi
+
+# Add new fixssh() function for terminal multiplexers
+if [ -f "$DOTFILES/ssh/grabssh.zsh" ]; then
+  . "$DOTFILES/ssh/grabssh.zsh"
+fi
+
+# Add the bashmarks script to this file
+if [ -f "$DOTFILES/bash/bashmarks" ]; then
+  . "$DOTFILES/bash/bashmarks"
+fi
+
+# Add any new auto completions to this file
+if [ -f "$DOTFILES/bash/completions" ]; then
+  . "$DOTFILES/bash/completions"
+fi
+
+# Add any local customizations
+if [ -f ~/.localrc ]; then
+  . ~/.localrc
+fi
+
+if [ -n "$TERM" ]; then
+  export HISTCONTROL=ignoredups
+
+  shopt -s checkwinsize
+  shopt -s cdspell
+
+  # Disable XON/XOFF flow control
+  stty -ixon
+fi
+
+# Make sure that bash completion is enabled
+if [ -s /etc/bash_completion ]; then
+  . /etc/bash_completion
+elif [ -s /usr/local/etc/bash_completion ]; then
+  . /usr/local/etc/bash_completion
+fi
+
+# Deduplicate PATH
+if [ -f "$DOTFILES/system/path_deduper.zsh" ]; then
+  . "$DOTFILES/system/path_deduper.zsh"
+fi
+
+# Set RWX permissions only for user and group
+umask 007
+
+# Starship prompt
+eval "$(starship init bash)"
