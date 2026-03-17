@@ -2,7 +2,7 @@
 #
 # Installs Starship prompt.
 
-DOTFILES="$HOME/.dotfiles"
+DOTFILES="$(cd "$(dirname "$0")/.." && pwd)"
 
 # shellcheck source=script/functions
 . "$DOTFILES/script/functions"

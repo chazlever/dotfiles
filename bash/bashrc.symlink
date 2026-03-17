@@ -1,6 +1,6 @@
 # Author: Chaz Lever
 
-DOTFILES="$HOME/.dotfiles"
+DOTFILES="$(dirname "$(dirname "$(readlink ~/.bashrc)")")"
 
 # Add new items to path
 if [ -f "$DOTFILES/system/path.zsh" ]; then

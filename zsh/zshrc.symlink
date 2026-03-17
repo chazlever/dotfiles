@@ -5,7 +5,7 @@
 #   Chaz Lever <chaz@noreply.users.github.com>
 #
 
-DOTFILES="$HOME/.dotfiles"
+DOTFILES="$(dirname "$(dirname "$(readlink ~/.zshrc)")")"
 
 # Setup ZSH key bindings
 bindkey \^U backward-kill-line
