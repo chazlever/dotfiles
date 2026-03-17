@@ -1,0 +1,11 @@
+[include]
+	path = ~/.gitconfig.local
+[alias]
+	last = cat-file commit HEAD
+	graph = log --graph
+[color]
+	ui = true
+[core]
+	excludesfile = ~/.gitignore
+[format]
+	pretty = %C(yellow)%h%Creset %s %C(red)(%an, %cr)%Creset

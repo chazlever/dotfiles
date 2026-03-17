@@ -1,0 +1,18 @@
+#!/bin/sh
+#
+# Runs all topic install.sh scripts.
+
+set -e
+
+DOTFILES="$(cd "$(dirname "$0")/.." && pwd)"
+
+# shellcheck source=script/functions
+. "$DOTFILES/script/functions"
+
+# Find and run all install.sh scripts
+find "$DOTFILES" -name install.sh -not -path '*/\.git/*' | while read -r installer; do
+  topic="$(basename "$(dirname "$installer")")"
+  info "installing $topic"
+  sh "$installer"
+  success "$topic installed"
+done
