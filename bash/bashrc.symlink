@@ -75,3 +75,8 @@ umask 007
 
 # Starship prompt
 eval "$(starship init bash)"
+
+# Add blank line between prompts (skip the first prompt)
+__add_newline() { __add_newline() { echo; }; }
+PROMPT_COMMAND="__add_newline;${PROMPT_COMMAND}"
+alias clear='__add_newline() { __add_newline() { echo; }; } && clear'
