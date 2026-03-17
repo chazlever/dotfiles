@@ -1,6 +1,0 @@
-#!/bin/bash
-
-# Add bash completion for ssh/scp aliases
-complete -F _ssh pssh
-complete -F _scp pscp
-

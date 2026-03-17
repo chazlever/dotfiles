@@ -1,6 +1,6 @@
 export LESS="-R"
 
-if [ ! -z $(which vim) ]; then
+if [ -n "$(command -v vim)" ]; then
   # Set the default text editor to vim
   export EDITOR=vim
  
@@ -14,7 +14,7 @@ if [ ! -z $(which vim) ]; then
   # word under the cursor by using [section_number]K.
   # Note we use bash explicitly here to support process substitution
   # which in turn suppresses the "Vim: Reading from stdin..." warning.
-  if [ ${VIM_VERSION} -ge 7 ]; then
+  if [ "${VIM_VERSION}" -ge 7 ]; then
     export MANPAGER='bash -c "vim -MRn -c \"set ft=man nomod nolist nospell nonu\" \
       -c \"nm q :qa!<CR>\" -c \"nm <end> G\" -c \"nm <home> gg\"</dev/tty <(col -b)"'
   fi
@@ -23,7 +23,7 @@ if [ ! -z $(which vim) ]; then
   # We want vim to highlight the raw text, so disable that feature.
   # Also see MANPAGER in my .vimrc for extra handling to support
   # ctrl-[ with man-db
-  if [ ${VIM_VERSION} -ge 7 ]; then
+  if [ "${VIM_VERSION}" -ge 7 ]; then
     export GROFF_NO_SGR=1
   fi
   # Another option is to use $VIMRUNTIME/macros/less.sh

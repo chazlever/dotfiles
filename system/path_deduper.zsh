@@ -3,7 +3,9 @@
 
 set -f         # Turn off globbing, to allow unprotected variable substitutions
 IFS=:
-old_PATH=$PATH:; PATH=
+old_PATH=$PATH:
+# shellcheck disable=SC2123
+PATH=
 while [ -n "$old_PATH" ]; do
   x=${old_PATH%%:*}       # the first remaining entry
   case $PATH: in

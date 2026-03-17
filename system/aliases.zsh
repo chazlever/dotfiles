@@ -1,11 +1,12 @@
 # Get the color flag depending on OS
 COLOR='--color=auto'
-if [ "$(echo $(uname) | tr A-Z a-z)" = "darwin" ]; then
+if [ "$(uname | tr '[:upper:]' '[:lower:]')" = "darwin" ]; then
   COLOR='-G'
 fi
 
 alias timestamp="date +%Y%m%d-%H%M-%s"
 
+# shellcheck disable=SC2139
 alias ls="ls -h ${COLOR}"  # enable colorized listings
 alias ls.='ls -d .*'       # list hidden files
 alias lsa='ls -la'         # list all files 
