@@ -99,9 +99,15 @@ link_file () {
       fi
     fi
 
-    overwrite=${overwrite:-$overwrite_all}
-    backup=${backup:-$backup_all}
-    skip=${skip:-$skip_all}
+    if [ "$overwrite_all" = "true" ]; then
+      overwrite=true
+    fi
+    if [ "$backup_all" = "true" ]; then
+      backup=true
+    fi
+    if [ "$skip_all" = "true" ]; then
+      skip=true
+    fi
 
     if [ "$overwrite" = "true" ]; then
       rm -rf "$dst"

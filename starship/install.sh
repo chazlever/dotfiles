@@ -17,5 +17,6 @@ if [ "$(uname)" = "Darwin" ]; then
   brew install starship
 else
   info "installing starship to ~/.local/bin"
+  mkdir -p ~/.local/bin
   curl -sS https://starship.rs/install.sh | sh -s -- --bin-dir ~/.local/bin -y
 fi
