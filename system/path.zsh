@@ -32,6 +32,8 @@ path_helper() {
   fi
 }
 
+export PATH="$HOME/.local/bin:$PATH"
+
 path_helper "${HOME}/.pathrc" "PATH"
 path_helper "${HOME}/.pythonpathrc" "PYTHONPATH"
 
