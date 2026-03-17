@@ -92,5 +92,9 @@ set -g @plugin 'tmux-plugins/tmux-sensible'
 set -g @plugin 'christoomey/vim-tmux-navigator'
 set -g @plugin 'dracula/tmux'
 
+# Auto-install plugins if not already present
+if "test ! -d ~/.tmux/plugins/tmux-sensible" \
+   "run '~/.tmux/plugins/tpm/bin/install_plugins'"
+
 # Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
 run '~/.tmux/plugins/tpm/tpm'

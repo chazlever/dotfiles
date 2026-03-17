@@ -88,7 +88,7 @@ call plug#end()
 let g:dracula_colorterm = 0
 let g:dracula_italic = 0
 set background=dark
-colorscheme dracula
+silent! colorscheme dracula
 
 "------------------------------------------------------------------------------
 " CONFIGURE PLUGIN OPTIONS
