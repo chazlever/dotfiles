@@ -8,7 +8,14 @@
 DOTFILES="$(dirname "$(dirname "$(readlink ~/.zshrc)")")"
 
 # Setup ZSH key bindings
-bindkey \^U backward-kill-line
+bindkey "^U" backward-kill-line
+bindkey "^A" beginning-of-line
+bindkey "^E" end-of-line
+bindkey "^K" kill-line           # delete from cursor to end of line
+bindkey "^U" backward-kill-line  # delete from cursor to beginning
+bindkey "^W" backward-kill-word  # delete previous word
+bindkey "^[f" forward-word       # alt+f move forward one word
+bindkey "^[b" backward-word      # alt+b move backward one word
 
 # Add any local customizations
 if [ -f ~/.localrc ]; then
