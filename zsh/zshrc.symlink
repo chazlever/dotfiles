@@ -17,20 +17,15 @@ bindkey "^W" backward-kill-word  # delete previous word
 bindkey "^[f" forward-word       # alt+f move forward one word
 bindkey "^[b" backward-word      # alt+b move backward one word
 
-# Add any local customizations
-if [ -f ~/.localrc ]; then
-  . ~/.localrc
-fi
-
 # Source all path.zsh files first
-for file in "$DOTFILES"/*/path.zsh(N); do
+for file in "$DOTFILES"/*/path.sh(N); do
   source "$file"
 done
 
 # Source all *.zsh files (except path.zsh and completion.zsh)
-for file in "$DOTFILES"/*/*.zsh(N); do
+for file in "$DOTFILES"/*/*.sh(N); do
   case "$file" in
-    */path.zsh|*/completion.zsh) continue ;;
+    */path.sh|*/completion.sh) continue ;;
   esac
   source "$file"
 done
@@ -48,12 +43,17 @@ zstyle ':completion:*:warnings' format '%F{red}No matches for: %d%f'
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*'
 
 # Source all completion.zsh files last
-for file in "$DOTFILES"/*/completion.zsh(N); do
+for file in "$DOTFILES"/*/completion.sh(N); do
   source "$file"
 done
 
 source $DOTFILES/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $DOTFILES/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# Add any local customizations
+if [ -f ~/.localrc ]; then
+  . ~/.localrc
+fi
 
 eval "$(starship init zsh)"
 

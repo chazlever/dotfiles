@@ -55,7 +55,7 @@ containing related configuration:
 
 - **`*.symlink`** — Symlinked to `~/.<basename>` (e.g., `zsh/zshrc.symlink` becomes `~/.zshrc`)
 - **`*.config`** — Symlinked to `~/.config/<basename>` (e.g., `starship/starship.toml.config` becomes `~/.config/starship.toml`)
-- **`*.zsh`** — Automatically sourced by zshrc. `path.zsh` files are loaded first, `completion.zsh` files are loaded last.
+- **`*.sh`** — Automatically sourced by both zshrc and bashrc. `path.sh` files are loaded first, `completion.sh` files are loaded last.
 - **`install.sh`** — Per-topic installer, run by `script/install` during bootstrap
 - **`*.example`** — Template files with placeholders, copied and configured during bootstrap
 
