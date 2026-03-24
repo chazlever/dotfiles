@@ -28,3 +28,6 @@ window-show-tab-bar = always
 
 # Shift+Enter sends ESC before carriage return (useful for newlines in prompts)
 keybind = shift+enter=text:\x1b\r
+
+# Command+Option+G to launch the Quick Terminal
+keybind = global:cmd+alt+g=toggle_quick_terminal
