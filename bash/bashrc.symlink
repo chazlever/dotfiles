@@ -2,9 +2,9 @@
 
 DOTFILES="$(dirname "$(dirname "$(readlink ~/.bashrc)")")"
 
-# Source all path.sh files first
+# Source all path.source files first
 shopt -s nullglob
-for file in "$DOTFILES"/*/path.sh; do
+for file in "$DOTFILES"/*/path.source; do
   . "$file"
 done
 shopt -u nullglob
@@ -12,11 +12,11 @@ shopt -u nullglob
 # If not running interactively, don't do anything
 [ -z "${PS1}" ] && return
 
-# Source all *.sh files (except path.sh and completion.sh)
+# Source all *.source files (except path.source and completion.source)
 shopt -s nullglob
-for file in "$DOTFILES"/*/*.sh; do
+for file in "$DOTFILES"/*/*.source; do
   case "$file" in
-    */path.sh|*/completion.sh) continue ;;
+    */path.source|*/completion.source) continue ;;
   esac
   . "$file"
 done
@@ -39,9 +39,9 @@ elif [ -s /usr/local/etc/bash_completion ]; then
   . /usr/local/etc/bash_completion
 fi
 
-# Source all completion.sh files last
+# Source all completion.source files last
 shopt -s nullglob
-for file in "$DOTFILES"/*/completion.sh; do
+for file in "$DOTFILES"/*/completion.source; do
   . "$file"
 done
 shopt -u nullglob

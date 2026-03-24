@@ -17,15 +17,15 @@ bindkey "^W" backward-kill-word  # delete previous word
 bindkey "^[f" forward-word       # alt+f move forward one word
 bindkey "^[b" backward-word      # alt+b move backward one word
 
-# Source all path.zsh files first
-for file in "$DOTFILES"/*/path.sh(N); do
+# Source all path.source files first
+for file in "$DOTFILES"/*/path.source(N); do
   source "$file"
 done
 
-# Source all *.zsh files (except path.zsh and completion.zsh)
-for file in "$DOTFILES"/*/*.sh(N); do
+# Source all *.source files (except path.source and completion.source)
+for file in "$DOTFILES"/*/*.source(N); do
   case "$file" in
-    */path.sh|*/completion.sh) continue ;;
+    */path.source|*/completion.source) continue ;;
   esac
   source "$file"
 done
@@ -42,8 +42,8 @@ zstyle ':completion:*:descriptions' format '%F{yellow}-- %d --%f'
 zstyle ':completion:*:warnings' format '%F{red}No matches for: %d%f'
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*'
 
-# Source all completion.zsh files last
-for file in "$DOTFILES"/*/completion.sh(N); do
+# Source all completion.source files last
+for file in "$DOTFILES"/*/completion.source(N); do
   source "$file"
 done
 
