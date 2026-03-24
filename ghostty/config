@@ -1,0 +1,30 @@
+# -- Theme --
+
+theme = Dracula
+
+# -- Font --
+
+# Primary font for text rendering; Nerd Font provides icon/symbol fallback
+font-family = JetBrains Mono
+font-family = Symbols Nerd Font Mono
+font-size = 16
+
+# Disable synthetic bold and subpixel thickening for a cleaner look
+font-style = Regular
+font-thicken = false
+
+# -- Window --
+
+# Add inner padding (in pixels) between the terminal content and window edges
+window-padding-x = 8
+window-padding-y = 4
+window-padding-balance = true
+
+# Use native macOS tabs integrated into the titlebar, always visible
+macos-titlebar-style = tabs
+window-show-tab-bar = always
+
+# -- Keybindings --
+
+# Shift+Enter sends ESC before carriage return (useful for newlines in prompts)
+keybind = shift+enter=text:\x1b\r
