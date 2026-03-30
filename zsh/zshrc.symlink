@@ -19,9 +19,11 @@ bindkey "^E" end-of-line
 bindkey "^K" kill-line           # delete from cursor to end of line
 bindkey "^U" backward-kill-line  # delete from cursor to beginning
 bindkey "^W" backward-kill-word  # delete previous word
+bindkey "^[^?" backward-kill-word  # esc+delete to delete previous word
 bindkey "^L" clear-screen        # ctrl+l clear screen
 bindkey "^[f" forward-word       # alt+f move forward one word
 bindkey "^[b" backward-word      # alt+b move backward one word
+bindkey "^[[Z" reverse-menu-complete  # shift+tab to go back in completion menu
 
 # Source all path.source files first
 for file in "$DOTFILES"/*/path.source(N); do
