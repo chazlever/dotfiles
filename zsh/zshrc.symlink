@@ -25,6 +25,11 @@ bindkey "^[f" forward-word       # alt+f move forward one word
 bindkey "^[b" backward-word      # alt+b move backward one word
 bindkey "^[[Z" reverse-menu-complete  # shift+tab to go back in completion menu
 
+# Edit command line in $EDITOR with ctrl+x ctrl+e
+autoload -Uz edit-command-line
+zle -N edit-command-line
+bindkey '^X^E' edit-command-line
+
 # Source all path.source files first
 for file in "$DOTFILES"/*/path.source(N); do
   source "$file"
