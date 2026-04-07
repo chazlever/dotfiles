@@ -2,6 +2,11 @@
 
 theme = Dracula
 
+# -- Shell --
+
+shell-integration-features = no-cursor
+cursor-style-blink = false
+
 # -- Font --
 
 # Primary font for text rendering; Nerd Font provides icon/symbol fallback
