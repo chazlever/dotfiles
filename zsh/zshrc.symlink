@@ -24,6 +24,8 @@ bindkey "^L" clear-screen        # ctrl+l clear screen
 bindkey "^[f" forward-word       # alt+f move forward one word
 bindkey "^[b" backward-word      # alt+b move backward one word
 bindkey "^[[Z" reverse-menu-complete  # shift+tab to go back in completion menu
+bindkey "^[[3~" delete-char       # delete key (forward delete)
+bindkey "^R" history-incremental-search-backward
 
 # Edit command line in $EDITOR with ctrl+x ctrl+e
 autoload -Uz edit-command-line
