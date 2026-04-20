@@ -1,0 +1,13 @@
+# carapace-bin: multi-shell completion engine
+# https://carapace.sh
+if command -v carapace >/dev/null 2>&1; then
+  # Fall through to native zsh/bash/fish completions for commands
+  # carapace doesn't have a spec for.
+  export CARAPACE_BRIDGES='zsh,bash,fish'
+
+  if [ -n "$ZSH_VERSION" ]; then
+    zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
+  fi
+
+  source <(carapace _carapace)
+fi
