@@ -15,21 +15,33 @@ fi
 # Disable XON/XOFF flow control so ctrl+s reaches the line editor
 [[ -t 0 ]] && stty -ixon
 
-# Setup ZSH key bindings
-bindkey "^U" backward-kill-line
-bindkey "^A" beginning-of-line
-bindkey "^E" end-of-line
-bindkey "^K" kill-line           # delete from cursor to end of line
-bindkey "^U" backward-kill-line  # delete from cursor to beginning
-bindkey "^W" backward-kill-word  # delete previous word
-bindkey "^[^?" backward-kill-word  # esc+delete to delete previous word
-bindkey "^L" clear-screen        # ctrl+l clear screen
-bindkey "^[f" forward-word       # alt+f move forward one word
-bindkey "^[b" backward-word      # alt+b move backward one word
-bindkey "^[[Z" reverse-menu-complete  # shift+tab to go back in completion menu
-bindkey "^[[3~" delete-char       # delete key (forward delete)
-bindkey "^R" history-incremental-search-backward
-bindkey "^S" history-incremental-search-forward
+# Force emacs keymap (EDITOR=vim would otherwise trigger viins)
+bindkey -e
+
+# Setup ZSH key bindings (emacs-keymap defaults are inherited from bindkey -e)
+bindkey "^[^?" backward-kill-word                  # esc+delete: kill previous word
+bindkey "^[[Z" reverse-menu-complete               # shift+tab: back in completion menu
+bindkey "^[[3~" delete-char                        # delete key (forward delete)
+bindkey "^S" history-incremental-search-forward    # forward history search (pair with default ^R)
+
+# Ctrl+arrow word movement (complements default alt+f / alt+b)
+bindkey "^[[1;5C" forward-word                     # ctrl+right
+bindkey "^[[1;5D" backward-word                    # ctrl+left
+
+# Home / End physical keys
+bindkey "^[[H" beginning-of-line
+bindkey "^[[F" end-of-line
+
+# accept-and-hold: run command but keep buffer for re-edit
+# NB: also fires on Ghostty's shift+enter (sends ESC+CR)
+bindkey "^[^M" accept-and-hold
+
+# Prefix-based history search on Up/Down
+autoload -Uz up-line-or-beginning-search down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey "^[[A" up-line-or-beginning-search
+bindkey "^[[B" down-line-or-beginning-search
 
 # Edit command line in $EDITOR with ctrl+x ctrl+e
 autoload -Uz edit-command-line
