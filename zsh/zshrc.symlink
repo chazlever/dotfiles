@@ -12,6 +12,9 @@ if ! infocmp "$TERM" &>/dev/null; then
   export TERM=xterm-256color
 fi
 
+# Disable XON/XOFF flow control so ctrl+s reaches the line editor
+[[ -t 0 ]] && stty -ixon
+
 # Setup ZSH key bindings
 bindkey "^U" backward-kill-line
 bindkey "^A" beginning-of-line
@@ -26,6 +29,7 @@ bindkey "^[b" backward-word      # alt+b move backward one word
 bindkey "^[[Z" reverse-menu-complete  # shift+tab to go back in completion menu
 bindkey "^[[3~" delete-char       # delete key (forward delete)
 bindkey "^R" history-incremental-search-backward
+bindkey "^S" history-incremental-search-forward
 
 # Edit command line in $EDITOR with ctrl+x ctrl+e
 autoload -Uz edit-command-line
