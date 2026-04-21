@@ -3,6 +3,11 @@
 [alias]
 	last = cat-file commit HEAD
 	graph = log --graph
+	churn = !git log --format=format: --name-only --since=\"1 year ago\" | sort | uniq -c | sort -nr | head -20
+	bus = shortlog -sn --no-merges
+	bugs = !git log -i -E --grep=\"fix|bug|broken\" --name-only --format=\"\" | sort | uniq -c | sort -nr | head -20
+	velocity = !git log --format=\"%ad\" --date=format:\"%Y-%m\" | sort | uniq -c
+	fire = !git log --oneline --since=\"1 year ago\" | grep -iE \"revert|hotfix|emergency|rollback\"
 [color]
 	ui = true
 [core]
