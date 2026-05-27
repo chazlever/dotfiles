@@ -17,6 +17,8 @@
 	ui = true
 [core]
 	excludesfile = ~/.gitignore
+	fsmonitor = true
+	untrackedCache = true
 [format]
 	pretty = %C(yellow)%h%Creset %s %C(red)(%an, %cr)%Creset
 [filter "lfs"]
@@ -24,3 +26,7 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+[feature]
+	manyFiles = true
+[gc]
+	writeCommitGraph = true
