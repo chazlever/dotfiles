@@ -3,11 +3,16 @@
 [alias]
 	last = cat-file commit HEAD
 	graph = log --graph
-	churn = !git log --format=format: --name-only --since=\"1 year ago\" | sort | uniq -c | sort -nr | head -20
+	churn = !git log --format=format: --name-only --since=\"1 year ago\" | grep -v \"^$\" | sort | uniq -c | sort -nr | head -20
 	bus = shortlog -sn --no-merges
 	bugs = !git log -i -E --grep=\"fix|bug|broken\" --name-only --format=\"\" | sort | uniq -c | sort -nr | head -20
 	velocity = !git log --format=\"%ad\" --date=format:\"%Y-%m\" | sort | uniq -c
 	fire = !git log --oneline --since=\"1 year ago\" | grep -iE \"revert|hotfix|emergency|rollback\"
+	large-files = "!git rev-list --objects --all | git cat-file --batch-check='%(objecttype) %(objectname) %(objectsize) %(rest)' | awk '/^blob/ {n=$3; s=\"B\"; if(n>1024){n/=1024;s=\"K\"} if(n>1024){n/=1024;s=\"M\"} if(n>1024){n/=1024;s=\"G\"} printf \"%.1f%s\\t%s\\n\", n, s, $4}' | sort -rh | head -20"
+	large-files-sum = "!git rev-list --objects --all | git cat-file --batch-check='%(objecttype) %(objectname) %(objectsize) %(rest)' | awk '/^blob/ && $4 { sum[$4] += $3 } END { for (p in sum) { n=sum[p]; s=\"B\"; if(n>1024){n/=1024;s=\"K\"} if(n>1024){n/=1024;s=\"M\"} if(n>1024){n/=1024;s=\"G\"} printf \"%.1f%s\\t%s\\n\", n, s, p } }' | sort -rh | head -20"
+	churn-all = !git log --format=format: --name-only | grep -v \"^$\" | sort | uniq -c | sort -nr | head -20
+	large-commits = "!git log --all --format=\"%H %s\" | while read hash subject; do size=$(git diff-tree --no-commit-id --numstat -r \"$hash\" | awk \"{s+=\\$1+\\$2} END {print s+0}\"); echo \"$size $hash $subject\"; done | sort -rn | head -20"
+	large-files-unique = "!git rev-list --objects --all | git cat-file --batch-check='%(objecttype) %(objectname) %(objectsize) %(rest)' | awk '/^blob/ && $4 { if ($3 > max[$4]) max[$4] = $3 } END { for (p in max) { n=max[p]; s=\"B\"; if(n>1024){n/=1024;s=\"K\"} if(n>1024){n/=1024;s=\"M\"} if(n>1024){n/=1024;s=\"G\"} printf \"%.1f%s\\t%s\\n\", n, s, p } }' | sort -rh | head -20"
 [color]
 	ui = true
 [core]
