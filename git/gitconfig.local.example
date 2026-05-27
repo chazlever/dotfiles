@@ -3,3 +3,13 @@
 	email = AUTHOREMAIL
 [github]
 	user = GITHUBUSER
+
+# Background maintenance is per-machine (absolute repo paths), so it lives
+# here rather than in the shared gitconfig. For each repo you want maintained,
+# run from inside it:
+#     git maintenance register --config-file ~/.gitconfig.local  # add to THIS file
+#     git maintenance start                                      # install the scheduler
+# Use --config-file so the repo path lands here; a plain `register`/`start`
+# would write to ~/.gitconfig (the shared, version-controlled symlink).
+# `start` installs the per-machine scheduler and reads the path via the
+# include above; it won't duplicate an already-registered repo.
