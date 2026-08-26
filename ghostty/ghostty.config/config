@@ -35,4 +35,4 @@ window-show-tab-bar = always
 keybind = shift+enter=text:\x1b\r
 
 # Command+Option+G to launch the Quick Terminal
-keybind = global:cmd+alt+g=toggle_quick_terminal
+keybind = global:ctrl+opt+cmd+shift+g=toggle_quick_terminal
