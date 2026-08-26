@@ -50,6 +50,7 @@ containing related configuration:
 - `system/` — Aliases, exports, and PATH management
 - `tmux/` — Tmux configuration and plugins
 - `vim/` — Vim configuration and plugins
+- `zoxide/` — [zoxide](https://github.com/ajeetdsouza/zoxide) shell integration (loaded only if installed)
 - `zsh/` — Zsh configuration and plugins
 
 ### File Conventions

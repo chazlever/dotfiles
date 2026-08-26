@@ -1,0 +1,18 @@
+# zoxide: frecency-based directory jumping
+# https://github.com/ajeetdsouza/zoxide
+#
+# Lives in completion.source (not *.source) because `zoxide init zsh` calls
+# compdef to register completion for `z`, and so must run after compinit.
+#
+# Provides `z <query>` to jump and `zi` for an interactive picker. `zi` shells
+# out to fzf at runtime; it degrades to a plain prompt if fzf is absent, so
+# there is no load-time dependency between this file and fzf's.
+#
+# Uses the default command names -- `cd` keeps stock behavior.
+if command -v zoxide >/dev/null 2>&1; then
+  if [ -n "$ZSH_VERSION" ]; then
+    eval "$(zoxide init zsh)"
+  elif [ -n "$BASH_VERSION" ]; then
+    eval "$(zoxide init bash)"
+  fi
+fi
