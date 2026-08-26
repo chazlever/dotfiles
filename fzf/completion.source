@@ -1,0 +1,21 @@
+# fzf: command-line fuzzy finder
+# https://github.com/junegunn/fzf
+#
+# Lives in completion.source (not *.source) because the zsh integration ends
+# with `bindkey '^I' fzf-completion` and must run after compinit.
+#
+# Provides: ^R fuzzy history, ^T file picker, alt-c fuzzy cd, and `**<TAB>`
+# fuzzy completion. Without the `**` trigger, TAB delegates to whatever was
+# bound to ^I beforehand (captured into $fzf_default_completion), so carapace
+# still drives ordinary completion.
+#
+# ^S is deliberately left alone -- zshrc binds it to
+# history-incremental-search-forward, and fzf's history widget has no notion
+# of direction, so binding it here would just duplicate ^R.
+if command -v fzf >/dev/null 2>&1; then
+  if [ -n "$ZSH_VERSION" ]; then
+    source <(fzf --zsh)
+  elif [ -n "$BASH_VERSION" ]; then
+    eval "$(fzf --bash)"
+  fi
+fi

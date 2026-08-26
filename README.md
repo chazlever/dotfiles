@@ -43,6 +43,7 @@ containing related configuration:
 
 - `bash/` — Bash shell configuration
 - `bin/` — Custom scripts, added to `$PATH`
+- `fzf/` — [fzf](https://github.com/junegunn/fzf) shell integration (loaded only if installed)
 - `git/` — Git configuration and global gitignore
 - `ssh/` — SSH agent helper and proxy functions
 - `starship/` — [Starship](https://starship.rs/) prompt configuration and installer
