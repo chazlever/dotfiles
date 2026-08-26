@@ -3,3 +3,5 @@
 *~
 *.swp
 *.pyc
+
+**/.claude/settings.local.json
